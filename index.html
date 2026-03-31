@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>🌍 EarthMonitor </title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: white;
+    text-align: center;
+}
+
+header {
+    font-size: 30px;
+    padding: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#map {
+    height: 350px;
+    margin: 20px;
+    border-radius: 15px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #1e293b;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0,255,150,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.value {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.good { color: #22c55e; }
+.medium { color: #facc15; }
+.bad { color: #ef4444; }
+
+.loader {
+    border: 4px solid #333;
+    border-top: 4px solid #22c55e;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+a {
+    color: #22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<header>🌍 EarthMonitor </header>
+
+<div id="map"></div>
+
+<div class="container">
+
+<div class="card">
+    <h3>🌫️ CO₂ Estimado</h3>
+    <div id="co2" class="value"><div class="loader"></div></div>
+</div>
+
+<div class="card">
+    <h3>📊 Qualidade do Ar</h3>
+    <div id="aqi" class="value"><div class="loader"></div></div>
+</div>
+
+<div class="card">
+    <h3>⚔️ Conflitos Globais</h3>
+    <ul id="noticias"></ul>
+</div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// MAPA
+let map = L.map('map').setView([-15.78, -47.93], 4);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// 🔑 APIs
+let API_KEY = "SUA_API_OPENWEATHER_AQUI";
+let NEWS_API = "SUA_API_GNEWS_AQUI";
+
+// CLASSIFICAÇÃO VISUAL
+function classificarAQI(aqi) {
+    if (aqi <= 2) return "good";
+    if (aqi <= 3) return "medium";
+    return "bad";
+}
+
+// DADOS DO AR
+async function buscarDados(lat, lon) {
+    try {
+        let res = await fetch(
+            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+        );
+
+        let data = await res.json();
+
+        let aqi = data.list[0].main.aqi;
+        let co = data.list[0].components.co;
+        let co2 = (co * 1.1).toFixed(2);
+
+        document.getElementById("co2").innerHTML =
+            `<span class="${classificarAQI(aqi)}">${co2}</span>`;
+
+        document.getElementById("aqi").innerHTML =
+            `<span class="${classificarAQI(aqi)}">${aqi}</span>`;
+
+    } catch {
+        document.getElementById("co2").innerText = "Erro";
+        document.getElementById("aqi").innerText = "Erro";
+    }
+}
+
+// NOTÍCIAS
+async function carregarNoticias() {
+    try {
+        let res = await fetch(
+            `https://gnews.io/api/v4/search?q=war&lang=pt&token=${NEWS_API}`
+        );
+
+        let data = await res.json();
+
+        let lista = document.getElementById("noticias");
+        lista.innerHTML = "";
+
+        data.articles.slice(0,5).forEach(n => {
+            let li = document.createElement("li");
+            li.innerHTML = `<a href="${n.url}" target="_blank">${n.title}</a>`;
+            lista.appendChild(li);
+        });
+
+    } catch {
+        document.getElementById("noticias").innerText = "Erro ao carregar";
+    }
+}
+
+// LOCALIZAÇÃO
+navigator.geolocation.getCurrentPosition(
+    pos => {
+        let lat = pos.coords.latitude;
+        let lon = pos.coords.longitude;
+
+        map.setView([lat, lon], 10);
+
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup("Você está aqui")
+            .openPopup();
+
+        buscarDados(lat, lon);
+    },
+    () => buscarDados(-15.78, -47.93)
+);
+
+// INICIAR
+carregarNoticias();
+</script>
+
+</body>
+</html>
