@@ -27,14 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Efeito de vidro e gradientes modernos */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(2px);
-            border-radius: 2rem;
-        }
-
-        /* TOP BAR */
         .top-bar {
             background: #0a2f0e;
             padding: 8px 24px;
@@ -54,7 +46,6 @@
             margin-right: 24px;
         }
 
-        /* HEADER */
         header {
             background: linear-gradient(135deg, #0f3b14 0%, #1c5e24 100%);
             color: white;
@@ -111,7 +102,6 @@
             font-size: 1.1rem;
         }
 
-        /* NAVBAR MODERNA COM DROPDOWN */
         nav {
             background: #ffffffdd;
             backdrop-filter: blur(12px);
@@ -138,10 +128,8 @@
         nav a:hover {
             border-bottom-color: #2e7d32;
             color: #0f3b14;
-            transform: translateY(-1px);
         }
 
-        /* DROPDOWN MENU - CATEGORIAS */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -200,25 +188,10 @@
             padding-left: 28px;
             color: #0a3b10;
         }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        /* Fechar ao clicar fora (mobile) */
-        .overlay-categories {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 998;
-        }
 
-        /* HERO */
         .hero {
             position: relative;
-            height: 70vh;
+            height: 65vh;
             min-height: 420px;
             background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
             display: flex;
@@ -232,16 +205,14 @@
             animation: fadeUp 1s ease-out;
         }
         .hero-content h2 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             font-weight: 800;
             text-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            letter-spacing: -0.02em;
         }
         .hero-content p {
             font-size: 1.2rem;
             margin-top: 16px;
             font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .btn-hero {
             margin-top: 32px;
@@ -266,7 +237,130 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* CONTAINER */
+        /* SEÇÃO OFERTAS */
+        .ofertas-section {
+            background: linear-gradient(135deg, #fff5e8 0%, #fff0e0 100%);
+            border-radius: 40px;
+            margin: 40px auto;
+            padding: 48px 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 180, 60, 0.3);
+        }
+        .ofertas-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .ofertas-header h2 {
+            font-size: 2.2rem;
+            color: #c45c1a;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ofertas-header h2 i {
+            background: #f5a623;
+            padding: 12px;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.3rem;
+        }
+        .ofertas-header p {
+            color: #7a5a3a;
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+        .ofertas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .card-oferta {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.1);
+            position: relative;
+            border: 1px solid #ffe0b5;
+        }
+        .card-oferta:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.2);
+        }
+        .oferta-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #f5a623;
+            color: #2c2c2c;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .img-oferta {
+            height: 220px;
+            overflow: hidden;
+        }
+        .img-oferta img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .card-oferta:hover .img-oferta img {
+            transform: scale(1.05);
+        }
+        .info-oferta {
+            padding: 20px 20px 24px;
+        }
+        .info-oferta h3 {
+            font-size: 1.4rem;
+            color: #2c5e2a;
+            margin-bottom: 8px;
+        }
+        .preco-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin: 8px 0 4px;
+        }
+        .preco-oferta {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #c45c1a;
+            margin: 5px 0;
+        }
+        .parcela {
+            font-size: 0.8rem;
+            color: #5f6b5a;
+        }
+        .btn-oferta {
+            margin-top: 18px;
+            background: #f5a623;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #2c2c2c;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-oferta:hover {
+            background: #e0940c;
+            gap: 12px;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -298,7 +392,6 @@
             font-size: 1.1rem;
         }
 
-        /* CARD PRODUTO */
         .produto {
             background: white;
             border-radius: 28px;
@@ -380,7 +473,6 @@
             gap: 16px;
         }
 
-        /* SWIPER */
         .swiper {
             width: 100%;
             padding: 20px 0 60px 0;
@@ -404,7 +496,6 @@
             background: #2e7d32 !important;
         }
 
-        /* DIFERENCIAIS */
         .features {
             display: flex;
             flex-wrap: wrap;
@@ -430,12 +521,7 @@
             margin: 0 auto 16px;
             color: #1f5e23;
         }
-        .feature-item h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
 
-        /* NEWSLETTER */
         .newsletter {
             background: #0e3313;
             border-radius: 40px;
@@ -470,7 +556,6 @@
             cursor: pointer;
         }
 
-        /* FOOTER */
         footer {
             background: #0a2a0e;
             color: #e2f0dc;
@@ -546,7 +631,6 @@
 <nav>
     <a href="#"><i class="fas fa-home"></i> Início</a>
     
-    <!-- DROPDOWN CATEGORIAS ao clicar em Produtos -->
     <div class="dropdown" id="produtosDropdown">
         <a id="produtosLink" style="cursor: pointer;"><i class="fas fa-boxes"></i> Produtos <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 6px;"></i></a>
         <div class="dropdown-content" id="categoriasMenu">
@@ -559,8 +643,7 @@
         </div>
     </div>
     
-    <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
-    <a href="#"><i class="fas fa-store"></i> Lojas</a>
+    <a href="#ofertasDestaque"><i class="fas fa-percent"></i> Ofertas</a>
     <a href="#"><i class="fas fa-headset"></i> Contato</a>
 </nav>
 
@@ -574,14 +657,24 @@
     </div>
 </div>
 
+<!-- SEÇÃO OFERTAS EM DESTAQUE -->
+<div class="container" id="ofertasDestaque">
+    <div class="ofertas-section">
+        <div class="ofertas-header">
+            <h2><i class="fas fa-tags"></i> Ofertas Imperdíveis</h2>
+            <p>Descontos especiais por tempo limitado - estoque garantido</p>
+        </div>
+        <div class="ofertas-grid" id="ofertasGrid"></div>
+    </div>
+</div>
+
+<!-- SEÇÃO PRODUTOS -->
 <div class="container" id="produtosSection">
     <h2 class="section-title">Nossos Produtos</h2>
     <div class="subhead" id="categoriaAtivaTexto">Seleção especial com os melhores insumos, equipamentos e nutrição animal</div>
 
     <div class="swiper mySwiper">
-        <div class="swiper-wrapper" id="produtosWrapper">
-            <!-- Os produtos serão carregados via JS dinamicamente -->
-        </div>
+        <div class="swiper-wrapper" id="produtosWrapper"></div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -652,7 +745,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-    // BASE DE DADOS DE PRODUTOS POR CATEGORIA
+    // BASE DE PRODUTOS
     const produtosData = {
         todos: [
             { nome: "Ração Super Premium", preco: "R$ 129,90", desc: "Alta digestibilidade, proteína nobre.", img: "https://images.unsplash.com/photo-1601758173925-196e2d5c2a91?w=600&auto=format", badge: "Mais vendido", categoria: "racao" },
@@ -661,36 +754,51 @@
             { nome: "Defensivo BioNativo", preco: "R$ 84,90", desc: "Controle biológico de pragas, orgânico.", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&auto=format", badge: "Orgânico", categoria: "defensivos" },
             { nome: "Feno Alfafa Premium", preco: "R$ 74,90", desc: "Rico em fibras, ideal para equinos.", img: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format", badge: "Nutrição animal", categoria: "forragens" },
             { nome: "Vermífugo Equino", preco: "R$ 45,90", desc: "Proteção completa contra parasitas.", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&auto=format", badge: "Veterinário", categoria: "veterinaria" },
-            { nome: "Kit Foice e Podão", preco: "R$ 119,90", desc: "Ferramentas profissionais para poda.", img: "https://images.unsplash.com/photo-1594568284297-7c64464062b1?w=600&auto=format", badge: "Oferta", categoria: "ferramentas" },
-            { nome: "Luvas de Vaqueta", preco: "R$ 59,90", desc: "Proteção e aderência para o trabalho rural.", img: "https://images.unsplash.com/photo-1603204357110-9f3aac51b24a?w=600&auto=format", badge: "Conforto", categoria: "equipamentos" },
-            { nome: "Inseticida Agrícola", preco: "R$ 99,90", desc: "Controle eficaz de pragas na lavoura.", img: "https://images.unsplash.com/photo-1574943320219-553eb3b3b3b?w=600&auto=format", badge: "Eficaz", categoria: "defensivos" }
+            { nome: "Kit Foice e Podão", preco: "R$ 119,90", desc: "Ferramentas profissionais para poda.", img: "https://images.unsplash.com/photo-1594568284297-7c64464062b1?w=600&auto=format", badge: "Oferta", categoria: "ferramentas" }
         ],
-        racao: [],
-        equipamentos: [],
-        defensivos: [],
-        forragens: [],
-        veterinaria: [],
-        ferramentas: []
+        racao: [], equipamentos: [], defensivos: [], forragens: [], veterinaria: [], ferramentas: []
     };
-
-    // Organizar por categoria
-    produtosData.todos.forEach(prod => {
-        const cat = prod.categoria;
-        if(produtosData[cat]) produtosData[cat].push(prod);
+    
+    produtosData.todos.forEach(prod => { 
+        if(produtosData[prod.categoria]) produtosData[prod.categoria].push(prod); 
     });
-
+    
+    // OFERTAS
+    const ofertasList = [
+        { nome: "Ração Premium + Brinde", precoAntigo: "R$ 149,90", precoOferta: "R$ 99,90", parcela: "ou 3x R$ 33,30", img: "https://images.unsplash.com/photo-1601758173925-196e2d5c2a91?w=600&auto=format", badge: "-33%" },
+        { nome: "Botina Agro Biqueira", precoAntigo: "R$ 289,90", precoOferta: "R$ 199,90", parcela: "ou 4x R$ 49,97", img: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format", badge: "-31%" },
+        { nome: "Combo Defensivo + Inseticida", precoAntigo: "R$ 179,90", precoOferta: "R$ 129,90", parcela: "ou 3x R$ 43,30", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&auto=format", badge: "SUPER OFF" }
+    ];
+    
+    function renderOfertas() {
+        const grid = document.getElementById("ofertasGrid");
+        if(!grid) return;
+        let html = '';
+        ofertasList.forEach(off => {
+            html += `
+                <div class="card-oferta">
+                    <div class="oferta-badge">${off.badge}</div>
+                    <div class="img-oferta"><img src="${off.img}" alt="${off.nome}"></div>
+                    <div class="info-oferta">
+                        <h3>${off.nome}</h3>
+                        <div class="preco-original">${off.precoAntigo}</div>
+                        <div class="preco-oferta">${off.precoOferta}</div>
+                        <div class="parcela">${off.parcela} sem juros</div>
+                        <button class="btn-oferta">Aproveitar Oferta <i class="fas fa-fire"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        grid.innerHTML = html;
+        document.querySelectorAll(".btn-oferta").forEach(btn => {
+            btn.addEventListener("click", () => alert("🔥 Oferta imperdível! Adicione ao carrinho e garanta o desconto."));
+        });
+    }
+    
     let swiperInstance = null;
-    let currentCategory = "todos";
-
-    // Função para renderizar os produtos no swiper
+    
     function renderProducts(categoryKey) {
-        let produtosArray = [];
-        if(categoryKey === "todos") {
-            produtosArray = produtosData.todos;
-        } else {
-            produtosArray = produtosData[categoryKey] || [];
-        }
-        
+        let produtosArray = (categoryKey === "todos") ? produtosData.todos : (produtosData[categoryKey] || []);
         const wrapper = document.getElementById("produtosWrapper");
         if(!wrapper) return;
         
@@ -719,14 +827,12 @@
         });
         wrapper.innerHTML = html;
         
-        // Atualizar ou recriar swiper
-        if(swiperInstance) {
-            swiperInstance.destroy(true, true);
-        }
+        if(swiperInstance) swiperInstance.destroy(true, true);
+        
         swiperInstance = new Swiper(".mySwiper", {
             slidesPerView: 1,
             spaceBetween: 24,
-            loop: produtosArray.length >= 2 ? true : false,
+            loop: produtosArray.length >= 2,
             autoplay: produtosArray.length > 1 ? { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true } : false,
             grabCursor: true,
             pagination: { el: ".swiper-pagination", clickable: true, dynamicBullets: true },
@@ -739,72 +845,50 @@
             speed: 700,
         });
         
-        // Atualizar texto da categoria
         const categoriaTexto = document.getElementById("categoriaAtivaTexto");
-        if(categoriaTexto) {
-            const nomes = { todos: "Todos os produtos em destaque", racao: "🍖 Nutrição e Ração de alta performance", equipamentos: "🥾 Equipamentos, botinas e EPIs", defensivos: "🌿 Defensivos e insumos agrícolas", forragens: "🌾 Forragens e feno premium", veterinaria: "💊 Medicamentos veterinários", ferramentas: "🔧 Ferramentas para o campo" };
-            categoriaTexto.innerHTML = nomes[categoryKey] || "Categoria selecionada";
-        }
+        const nomes = { todos: "Todos os produtos em destaque", racao: "🍖 Nutrição e Ração de alta performance", equipamentos: "🥾 Equipamentos, botinas e EPIs", defensivos: "🌿 Defensivos e insumos agrícolas", forragens: "🌾 Forragens e feno premium", veterinaria: "💊 Medicamentos veterinários", ferramentas: "🔧 Ferramentas para o campo" };
+        if(categoriaTexto) categoriaTexto.innerHTML = nomes[categoryKey] || "Categoria selecionada";
     }
-
-    // Inicializar com todos os produtos
+    
     renderProducts("todos");
-
-    // Gerenciar clique nas categorias do dropdown
-    const categoriasLinks = document.querySelectorAll("#categoriasMenu a");
+    renderOfertas();
+    
+    // Dropdown
     const dropdownDiv = document.getElementById("categoriasMenu");
     const dropdownContainer = document.getElementById("produtosDropdown");
     const produtosNavLink = document.getElementById("produtosLink");
     
-    function closeDropdown() {
-        dropdownDiv.classList.remove("show");
-    }
+    function closeDropdown() { dropdownDiv.classList.remove("show"); }
+    function openDropdown() { dropdownDiv.classList.add("show"); }
     
-    function openDropdown() {
-        dropdownDiv.classList.add("show");
-    }
-    
-    // Toggle ao clicar no link "Produtos"
     if(produtosNavLink) {
         produtosNavLink.addEventListener("click", function(e) {
             e.preventDefault();
             e.stopPropagation();
-            if(dropdownDiv.classList.contains("show")) {
-                closeDropdown();
-            } else {
-                openDropdown();
-            }
+            if(dropdownDiv.classList.contains("show")) closeDropdown();
+            else openDropdown();
         });
     }
     
-    // Fechar dropdown ao clicar fora
     document.addEventListener("click", function(event) {
-        if(!dropdownContainer.contains(event.target)) {
-            closeDropdown();
-        }
+        if(!dropdownContainer.contains(event.target)) closeDropdown();
     });
     
-    // Impedir fechamento ao clicar dentro do dropdown
-    dropdownDiv.addEventListener("click", function(e) {
-        e.stopPropagation();
-    });
+    dropdownDiv.addEventListener("click", function(e) { e.stopPropagation(); });
     
-    // Ação ao escolher uma categoria
-    categoriasLinks.forEach(link => {
+    document.querySelectorAll("#categoriasMenu a").forEach(link => {
         link.addEventListener("click", function(e) {
             e.preventDefault();
             const categoria = this.getAttribute("data-categoria");
             if(categoria) {
-                currentCategory = categoria;
-                renderProducts(currentCategory);
+                renderProducts(categoria);
                 closeDropdown();
-                // Scroll suave até a seção de produtos
                 document.getElementById("produtosSection").scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
     });
     
-    // Botão "Ver Opções" interativo
+    // Botões Ver Opções
     document.addEventListener("click", function(e) {
         if(e.target.classList.contains("btn-ver") || e.target.closest(".btn-ver")) {
             const btn = e.target.closest(".btn-ver");
@@ -829,7 +913,7 @@
         });
     }
     
-    // Busca básica
+    // Busca
     const searchBtn = document.querySelector(".search-box button");
     const searchInput = document.querySelector(".search-box input");
     if(searchBtn) {
