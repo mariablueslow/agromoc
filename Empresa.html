@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Agromoc | Loja Rural Premium</title>
+    
+    <!-- Swiper JS + CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafaf7;
+            color: #1e2a1f;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de vidro e gradientes modernos */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: #0a2f0e;
+            padding: 8px 24px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e0f2e3;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .top-bar i {
+            margin-right: 6px;
+            color: #b7e4c7;
+        }
+        .contact-info span {
+            margin-right: 24px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #0f3b14 0%, #1c5e24 100%);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+        .logo-area h1 {
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+            background: linear-gradient(120deg, #fff, #c8f0d2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .logo-area p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+        .search-box {
+            background: rgba(255,255,255,0.15);
+            border-radius: 60px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 8px;
+            font-size: 0.9rem;
+            color: white;
+            outline: none;
+            width: 220px;
+        }
+        .search-box input::placeholder {
+            color: #d9f0de;
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* NAVBAR MODERNA COM DROPDOWN */
+        nav {
+            background: #ffffffdd;
+            backdrop-filter: blur(12px);
+            padding: 12px 32px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        nav a {
+            color: #1a4a1f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        nav a:hover {
+            border-bottom-color: #2e7d32;
+            color: #0f3b14;
+            transform: translateY(-1px);
+        }
+
+        /* DROPDOWN MENU - CATEGORIAS */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            min-width: 260px;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            margin-top: 12px;
+            overflow: hidden;
+            animation: fadeInDown 0.25s ease-out;
+            border: 1px solid rgba(46,125,50,0.2);
+        }
+        .dropdown-content.show {
+            display: block;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 22px;
+            color: #1f4a24;
+            border-bottom: 1px solid #f0f4ec;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a i {
+            width: 28px;
+            font-size: 1.2rem;
+            color: #2e7d32;
+        }
+        .dropdown-content a:hover {
+            background: #e9f3e6;
+            padding-left: 28px;
+            color: #0a3b10;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Fechar ao clicar fora (mobile) */
+        .overlay-categories {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 998;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 420px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-attachment: fixed;
+        }
+        .hero-content {
+            animation: fadeUp 1s ease-out;
+        }
+        .hero-content h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            text-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            letter-spacing: -0.02em;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-top: 16px;
+            font-weight: 500;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .btn-hero {
+            margin-top: 32px;
+            background: #2c7a2f;
+            border: none;
+            padding: 14px 38px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        .btn-hero:hover {
+            background: #1f5e23;
+            transform: scale(1.03);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #17461e;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #b2dfb0);
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+        .subhead {
+            text-align: center;
+            color: #4a6741;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        /* CARD PRODUTO */
+        .produto {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(200, 220, 180, 0.4);
+        }
+        .produto:hover {
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 28px 40px -16px rgba(0, 32, 0, 0.25);
+        }
+        .img-container {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+            background: #eef4e6;
+        }
+        .produto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .produto:hover img {
+            transform: scale(1.08);
+        }
+        .badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #17461ecc;
+            backdrop-filter: blur(5px);
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+        .produto h3 {
+            font-size: 1.5rem;
+            margin: 20px 20px 8px;
+            color: #1f4f24;
+            font-weight: 700;
+        }
+        .produto p {
+            padding: 0 20px;
+            color: #4e5e46;
+            flex: 1;
+        }
+        .price-tag {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #2c7a2f;
+            margin: 12px 0 8px;
+        }
+        .btn-ver {
+            background: #17461e;
+            border: none;
+            margin: 16px 20px 24px;
+            padding: 12px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.25s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-ver:hover {
+            background: #0f3b14;
+            gap: 16px;
+        }
+
+        /* SWIPER */
+        .swiper {
+            width: 100%;
+            padding: 20px 0 60px 0;
+        }
+        .swiper-slide {
+            height: auto;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            background: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #17461e;
+        }
+        .swiper-pagination-bullet-active {
+            background: #2e7d32 !important;
+        }
+
+        /* DIFERENCIAIS */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            background: linear-gradient(120deg, #f5fbf2, #ffffff);
+            border-radius: 48px;
+            padding: 48px 28px;
+            margin: 40px 0;
+        }
+        .feature-item {
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            background: #17461e10;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 60px;
+            margin: 0 auto 16px;
+            color: #1f5e23;
+        }
+        .feature-item h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            background: #0e3313;
+            border-radius: 40px;
+            padding: 48px 32px;
+            margin-top: 48px;
+            text-align: center;
+            color: white;
+        }
+        .news-group {
+            display: flex;
+            max-width: 500px;
+            margin: 28px auto 0;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .news-group input {
+            flex: 2;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        .news-group button {
+            background: #f4b942;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: bold;
+            color: #1e3a1a;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0a2a0e;
+            color: #e2f0dc;
+            padding: 48px 24px 24px;
+            margin-top: 60px;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: #caf0c5;
+        }
+        .social i {
+            font-size: 1.5rem;
+            margin-right: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #2b5530;
+            padding-top: 28px;
+            margin-top: 48px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 700px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            nav {
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+            .dropdown-content {
+                left: 0;
+                transform: translateX(0);
+                min-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="contact-info">
+        <span><i class="fas fa-tractor"></i> Entrega para todo o Brasil</span>
+        <span><i class="fas fa-phone-alt"></i> (11) 4002-8922</span>
+    </div>
+    <div>
+        <i class="fas fa-map-marker-alt"></i> Unidade: Rodovia BR-050, KM 112
+    </div>
+</div>
+
+<header>
+    <div class="logo-area">
+        <h1><i class="fas fa-leaf"></i> Agromoc</h1>
+        <p>Agro inteligente | Tradição e inovação</p>
+    </div>
+    <div class="search-box">
+        <input type="text" placeholder="Buscar produtos, ofertas...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+</header>
+
+<nav>
+    <a href="#"><i class="fas fa-home"></i> Início</a>
+    
+    <!-- DROPDOWN CATEGORIAS ao clicar em Produtos -->
+    <div class="dropdown" id="produtosDropdown">
+        <a id="produtosLink" style="cursor: pointer;"><i class="fas fa-boxes"></i> Produtos <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 6px;"></i></a>
+        <div class="dropdown-content" id="categoriasMenu">
+            <a href="#" data-categoria="racao"><i class="fas fa-paw"></i> Ração & Nutrição</a>
+            <a href="#" data-categoria="equipamentos"><i class="fas fa-hard-hat"></i> Equipamentos & Botas</a>
+            <a href="#" data-categoria="defensivos"><i class="fas fa-leaf"></i> Defensivos Agrícolas</a>
+            <a href="#" data-categoria="forragens"><i class="fas fa-tree"></i> Forragens & Feno</a>
+            <a href="#" data-categoria="veterinaria"><i class="fas fa-syringe"></i> Medicamentos Veterinários</a>
+            <a href="#" data-categoria="ferramentas"><i class="fas fa-wrench"></i> Ferramentas Agrícolas</a>
+        </div>
+    </div>
+    
+    <a href="#"><i class="fas fa-percent"></i> Ofertas</a>
+    <a href="#"><i class="fas fa-store"></i> Lojas</a>
+    <a href="#"><i class="fas fa-headset"></i> Contato</a>
+</nav>
+
+<div class="hero">
+    <div class="hero-content">
+        <h2>Campo forte, colheita farta</h2>
+        <p>Qualidade premium para o agro que movimenta o Brasil</p>
+        <button class="btn-hero" onclick="document.getElementById('produtosSection').scrollIntoView({behavior:'smooth'})">
+            Explorar produtos <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+</div>
+
+<div class="container" id="produtosSection">
+    <h2 class="section-title">Nossos Produtos</h2>
+    <div class="subhead" id="categoriaAtivaTexto">Seleção especial com os melhores insumos, equipamentos e nutrição animal</div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="produtosWrapper">
+            <!-- Os produtos serão carregados via JS dinamicamente -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
+
+<!-- Diferenciais -->
+<div class="container">
+    <div class="features">
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
+            <h4>Entrega Rápida</h4>
+            <p>Frete grátis para Sul e Sudeste em compras acima de R$ 300</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-seedling"></i></div>
+            <h4>Produtos Certificados</h4>
+            <p>Origem fiscal e garantia de qualidade agropecuária</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <h4>Suporte Técnico</h4>
+            <p>Engenheiros agrônomos para orientação personalizada</p>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+<div class="container">
+    <div class="newsletter">
+        <h3><i class="fas fa-envelope-open-text"></i> Receba ofertas exclusivas</h3>
+        <p>Fique por dentro de lançamentos e descontos especiais para o campo.</p>
+        <div class="news-group">
+            <input type="email" placeholder="Seu melhor e-mail" id="emailNews">
+            <button id="btnNews">Inscrever-se</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4><i class="fas fa-store"></i> Agromoc</h4>
+            <p>Soluções completas para o agronegócio moderno.<br> Compromisso com a terra e produtividade.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Links úteis</h4>
+            <p><a href="#">Sobre nós</a></p>
+            <p><a href="#">Política de troca</a></p>
+            <p><a href="#">Trabalhe conosco</a></p>
+        </div>
+        <div class="footer-col">
+            <h4>Contato</h4>
+            <p><i class="fas fa-phone-alt"></i> (11) 4002-8922</p>
+            <p><i class="fas fa-envelope"></i> contato@agromoc.com.br</p>
+            <div class="social">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2026 Agromoc - Tecnologia e tradição que movem o campo. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    // BASE DE DADOS DE PRODUTOS POR CATEGORIA
+    const produtosData = {
+        todos: [
+            { nome: "Ração Super Premium", preco: "R$ 129,90", desc: "Alta digestibilidade, proteína nobre.", img: "https://images.unsplash.com/photo-1601758173925-196e2d5c2a91?w=600&auto=format", badge: "Mais vendido", categoria: "racao" },
+            { nome: "Ração Cavalo Atleta", preco: "R$ 189,90", desc: "Complexo vitamínico + minerais.", img: "https://images.unsplash.com/photo-1598970434795-0c54fe7c0642?w=600&auto=format", badge: "Energia extra", categoria: "racao" },
+            { nome: "Botina Agro Forte", preco: "R$ 259,90", desc: "Couro hidrorrepelente, solado antiderrapante.", img: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format", badge: "+ Conforto", categoria: "equipamentos" },
+            { nome: "Defensivo BioNativo", preco: "R$ 84,90", desc: "Controle biológico de pragas, orgânico.", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&auto=format", badge: "Orgânico", categoria: "defensivos" },
+            { nome: "Feno Alfafa Premium", preco: "R$ 74,90", desc: "Rico em fibras, ideal para equinos.", img: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format", badge: "Nutrição animal", categoria: "forragens" },
+            { nome: "Vermífugo Equino", preco: "R$ 45,90", desc: "Proteção completa contra parasitas.", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&auto=format", badge: "Veterinário", categoria: "veterinaria" },
+            { nome: "Kit Foice e Podão", preco: "R$ 119,90", desc: "Ferramentas profissionais para poda.", img: "https://images.unsplash.com/photo-1594568284297-7c64464062b1?w=600&auto=format", badge: "Oferta", categoria: "ferramentas" },
+            { nome: "Luvas de Vaqueta", preco: "R$ 59,90", desc: "Proteção e aderência para o trabalho rural.", img: "https://images.unsplash.com/photo-1603204357110-9f3aac51b24a?w=600&auto=format", badge: "Conforto", categoria: "equipamentos" },
+            { nome: "Inseticida Agrícola", preco: "R$ 99,90", desc: "Controle eficaz de pragas na lavoura.", img: "https://images.unsplash.com/photo-1574943320219-553eb3b3b3b?w=600&auto=format", badge: "Eficaz", categoria: "defensivos" }
+        ],
+        racao: [],
+        equipamentos: [],
+        defensivos: [],
+        forragens: [],
+        veterinaria: [],
+        ferramentas: []
+    };
+
+    // Organizar por categoria
+    produtosData.todos.forEach(prod => {
+        const cat = prod.categoria;
+        if(produtosData[cat]) produtosData[cat].push(prod);
+    });
+
+    let swiperInstance = null;
+    let currentCategory = "todos";
+
+    // Função para renderizar os produtos no swiper
+    function renderProducts(categoryKey) {
+        let produtosArray = [];
+        if(categoryKey === "todos") {
+            produtosArray = produtosData.todos;
+        } else {
+            produtosArray = produtosData[categoryKey] || [];
+        }
+        
+        const wrapper = document.getElementById("produtosWrapper");
+        if(!wrapper) return;
+        
+        if(produtosArray.length === 0) {
+            wrapper.innerHTML = `<div class="swiper-slide" style="text-align:center; background:white; border-radius:28px; padding:40px;"><i class="fas fa-box-open" style="font-size:48px; color:#aaa;"></i><p style="margin-top:20px;">Nenhum produto encontrado nesta categoria.</p><p>Em breve novidades!</p></div>`;
+            if(swiperInstance) swiperInstance.update();
+            return;
+        }
+        
+        let html = '';
+        produtosArray.forEach(prod => {
+            html += `
+                <div class="swiper-slide">
+                    <div class="produto">
+                        <div class="img-container">
+                            <img src="${prod.img}" alt="${prod.nome}">
+                            <div class="badge">${prod.badge || "Destaque"}</div>
+                        </div>
+                        <h3>${prod.nome}</h3>
+                        <p>${prod.desc}</p>
+                        <div class="price-tag">${prod.preco}</div>
+                        <button class="btn-ver">Ver Opções <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        wrapper.innerHTML = html;
+        
+        // Atualizar ou recriar swiper
+        if(swiperInstance) {
+            swiperInstance.destroy(true, true);
+        }
+        swiperInstance = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: produtosArray.length >= 2 ? true : false,
+            autoplay: produtosArray.length > 1 ? { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true } : false,
+            grabCursor: true,
+            pagination: { el: ".swiper-pagination", clickable: true, dynamicBullets: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 24 },
+                1024: { slidesPerView: 3, spaceBetween: 32 },
+                1280: { slidesPerView: 4, spaceBetween: 30 }
+            },
+            speed: 700,
+        });
+        
+        // Atualizar texto da categoria
+        const categoriaTexto = document.getElementById("categoriaAtivaTexto");
+        if(categoriaTexto) {
+            const nomes = { todos: "Todos os produtos em destaque", racao: "🍖 Nutrição e Ração de alta performance", equipamentos: "🥾 Equipamentos, botinas e EPIs", defensivos: "🌿 Defensivos e insumos agrícolas", forragens: "🌾 Forragens e feno premium", veterinaria: "💊 Medicamentos veterinários", ferramentas: "🔧 Ferramentas para o campo" };
+            categoriaTexto.innerHTML = nomes[categoryKey] || "Categoria selecionada";
+        }
+    }
+
+    // Inicializar com todos os produtos
+    renderProducts("todos");
+
+    // Gerenciar clique nas categorias do dropdown
+    const categoriasLinks = document.querySelectorAll("#categoriasMenu a");
+    const dropdownDiv = document.getElementById("categoriasMenu");
+    const dropdownContainer = document.getElementById("produtosDropdown");
+    const produtosNavLink = document.getElementById("produtosLink");
+    
+    function closeDropdown() {
+        dropdownDiv.classList.remove("show");
+    }
+    
+    function openDropdown() {
+        dropdownDiv.classList.add("show");
+    }
+    
+    // Toggle ao clicar no link "Produtos"
+    if(produtosNavLink) {
+        produtosNavLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if(dropdownDiv.classList.contains("show")) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        });
+    }
+    
+    // Fechar dropdown ao clicar fora
+    document.addEventListener("click", function(event) {
+        if(!dropdownContainer.contains(event.target)) {
+            closeDropdown();
+        }
+    });
+    
+    // Impedir fechamento ao clicar dentro do dropdown
+    dropdownDiv.addEventListener("click", function(e) {
+        e.stopPropagation();
+    });
+    
+    // Ação ao escolher uma categoria
+    categoriasLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const categoria = this.getAttribute("data-categoria");
+            if(categoria) {
+                currentCategory = categoria;
+                renderProducts(currentCategory);
+                closeDropdown();
+                // Scroll suave até a seção de produtos
+                document.getElementById("produtosSection").scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
+    });
+    
+    // Botão "Ver Opções" interativo
+    document.addEventListener("click", function(e) {
+        if(e.target.classList.contains("btn-ver") || e.target.closest(".btn-ver")) {
+            const btn = e.target.closest(".btn-ver");
+            const card = btn.closest(".produto");
+            const nomeProd = card?.querySelector("h3")?.innerText || "produto";
+            alert(`🛒 Redirecionando para opções de compra: ${nomeProd}\nConfira as melhores ofertas!`);
+        }
+    });
+    
+    // Newsletter
+    const btnNews = document.getElementById("btnNews");
+    const emailInput = document.getElementById("emailNews");
+    if(btnNews) {
+        btnNews.addEventListener("click", () => {
+            const email = emailInput.value.trim();
+            if(email && email.includes("@") && email.includes(".")) {
+                alert(`✅ Inscrição confirmada! ${email} receberá nossas ofertas.`);
+                emailInput.value = "";
+            } else {
+                alert("Por favor, insira um e-mail válido.");
+            }
+        });
+    }
+    
+    // Busca básica
+    const searchBtn = document.querySelector(".search-box button");
+    const searchInput = document.querySelector(".search-box input");
+    if(searchBtn) {
+        searchBtn.addEventListener("click", () => {
+            const termo = searchInput.value.trim();
+            if(termo) alert(`🔎 Buscando por "${termo}" nos melhores produtos agro.`);
+            else alert("Digite algo para pesquisar: ração, botina, defensivo...");
+        });
+    }
+</script>
+</body>
+</html>
