@@ -37,17 +37,17 @@
 
         .top-bar {
             background: #0a2f0e;
-            padding: 8px 24px;
+            padding: 6px 24px;
             font-size: 0.85rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center 65%;
             color: #e0f2e3;
             flex-wrap: wrap;
             gap: 12px;
         }
         .top-bar i {
-            margin-right: 6px;
+            margin-right: 8px;
             color: #b7e4c7;
         }
         .contact-info span {
@@ -220,9 +220,12 @@
             position: relative;
             height: 65vh;
             min-height: 420px;
-            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            display: flex;
-            align-items: center;
+           background: linear-gradient(
+    0deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+),
+url('https://i.pinimg.com/736x/ef/62/d8/ef62d83bb0282544c725dee496344079.jpg') center/cover no-repeat;
             justify-content: center;
             text-align: center;
             color: white;
@@ -781,6 +784,15 @@
             border: 1px solid #d4e0ce;
             border-radius: 40px;
         }
+        .alerta-limite {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 10px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
         .features {
             display: flex;
@@ -1040,13 +1052,58 @@
                 flex-wrap: wrap;
             }
         }
+
+
+
+        body {
+    background-image: url("textura.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body {
+    background: linear-gradient(rgba(0,50,0,0.8), rgba(0,50,0,0.8)),
+                url("https://img.freepik.com/vetores-gratis/cowboy-com-cena-de-silhueta-de-cavalos_603843-2964.jpg?semt=ais_hybrid&w=740&q=80https://img.freepik.com/vetores-gratis/cowboy-com-cena-de-silhueta-de-cavalos_603843-2964.jpg?semt=ais_hybrid&w=740&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero {
+    position: relative;
+    height: 65vh;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-size: cover;
+    background-position: center 60%;  /* ← AQUI! Mude para descer a imagem */
+    background-attachment: fixed;
+}
+
+
+.hero-content p.destaque {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #f5a623;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+    letter-spacing: 1px;
+    background: rgba(0,0,0,0.4);
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 60px;
+    backdrop-filter: blur(4px);
+    margin-top: 20px;
+}
     </style>
 </head>
 <body>
 
 <div class="top-bar">
     <div class="contact-info">
-        <span><i class="fas fa-tractor"></i> Entrega para todo o Brasil</span>
+        <span><i class="fas fa-tractor"></i> Realizamos entregas</span>
         <span><i class="fas fa-phone-alt"></i> (38) 99955-5854</span>
     </div>
     <div>
@@ -1093,8 +1150,8 @@
 <div id="homePage" class="page active">
     <div class="hero">
         <div class="hero-content">
-            <h2>Campo forte, colheita farta</h2>
-            <p>Qualidade premium para o agro que movimenta o Brasil</p>
+            <h2>Força no campo, tradição na pista</h2>
+            <p></p>Rações de qualidade e moda agro para quem vive a vaquejada de verdade
             <button class="btn-hero" onclick="document.getElementById('produtosSectionHome').scrollIntoView({behavior:'smooth'})">
                 Explorar produtos <i class="fas fa-arrow-right"></i>
             </button>
@@ -1161,6 +1218,7 @@
     <div class="galeria-page">
         <h2 class="section-title">Nossa Galeria</h2>
         <div class="subhead">MOMENTOS · ESTRUTURA · INSPIRAÇÃO</div>
+        <!-- CONTADOR OCULTO - NÃO APARECE PARA O CLIENTE -->
         <div class="galeria-flex" id="galeriaFlex"></div>
     </div>
 </div>
@@ -1222,6 +1280,12 @@
         <!-- Aba Galeria -->
         <div id="tabGaleria" class="admin-content">
             <h3>Adicionar Imagem à Galeria</h3>
+            <div id="alertaLimite" class="alerta-limite">
+                <i class="fas fa-exclamation-triangle"></i> Limite de 15 imagens atingido! Remova uma imagem antes de adicionar outra.
+            </div>
+            <div id="alertaMinimo" class="alerta-limite" style="background:#e8f3e5; color:#17461e; display:none;">
+                <i class="fas fa-info-circle"></i> Mínimo de 5 imagens necessário. Adicione mais imagens.
+            </div>
             <form id="formGaleria">
                 <div class="form-group">
                     <label>URL da Imagem</label>
@@ -1240,10 +1304,10 @@
                         <option value="xg">Extra Grande</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-primary">Adicionar Imagem</button>
+                <button type="submit" class="btn-primary" id="btnAddGaleria">Adicionar Imagem</button>
             </form>
             
-            <h3 style="margin-top: 40px;">Imagens da Galeria</h3>
+            <h3 style="margin-top: 40px;">Imagens da Galeria (<span id="galeriaCountAdmin">0</span>/15) | Mínimo: 5</h3>
             <div id="listaGaleria" class="lista-items"></div>
         </div>
     </div>
@@ -1311,6 +1375,10 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
+    // ==================== CONFIGURAÇÕES ====================
+    const MIN_GALERIA_IMAGENS = 5;   // Mínimo de 5 imagens
+    const MAX_GALERIA_IMAGENS = 15;  // Máximo de 15 imagens
+    
     // ==================== DADOS GLOBAIS ====================
     let produtosData = {
         todos: [],
@@ -1374,6 +1442,11 @@
         
         if(savedGaleria) {
             galeriaImagens = JSON.parse(savedGaleria);
+            // Garantir que não ultrapasse o limite máximo
+            if(galeriaImagens.length > MAX_GALERIA_IMAGENS) {
+                galeriaImagens = galeriaImagens.slice(0, MAX_GALERIA_IMAGENS);
+                saveGaleria();
+            }
         } else {
             galeriaImagens = [
                 { url: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600", desc: "Campo ao amanhecer", tamanho: "xg" },
@@ -1384,6 +1457,7 @@
             ];
             saveGaleria();
         }
+        atualizarContadoresGaleria();
     }
     
     function saveProdutos() {
@@ -1392,6 +1466,36 @@
     
     function saveGaleria() {
         localStorage.setItem('agromoc_galeria', JSON.stringify(galeriaImagens));
+        atualizarContadoresGaleria();
+    }
+    
+    function atualizarContadoresGaleria() {
+        const count = galeriaImagens.length;
+        const countAdmin = document.getElementById('galeriaCountAdmin');
+        if(countAdmin) countAdmin.textContent = count;
+        
+        // Verificar limite máximo
+        const alertaMax = document.getElementById('alertaLimite');
+        const btnAdd = document.getElementById('btnAddGaleria');
+        if(alertaMax) {
+            if(count >= MAX_GALERIA_IMAGENS) {
+                alertaMax.style.display = 'block';
+                if(btnAdd) btnAdd.disabled = true;
+            } else {
+                alertaMax.style.display = 'none';
+                if(btnAdd) btnAdd.disabled = false;
+            }
+        }
+        
+        // Verificar limite mínimo (apenas alerta visual, não bloqueia)
+        const alertaMin = document.getElementById('alertaMinimo');
+        if(alertaMin) {
+            if(count < MIN_GALERIA_IMAGENS) {
+                alertaMin.style.display = 'block';
+            } else {
+                alertaMin.style.display = 'none';
+            }
+        }
     }
     
     // ==================== RENDER FUNCTIONS ====================
@@ -1476,12 +1580,19 @@
     function renderGaleria() {
         const container = document.getElementById("galeriaFlex");
         if(!container) return;
+        
+        if(galeriaImagens.length === 0) {
+            container.innerHTML = `<div style="text-align:center; width:100%; padding:40px; color:#8a9a84;">Nenhuma imagem na galeria. Adicione pelo painel Admin.</div>`;
+            return;
+        }
+        
         container.innerHTML = galeriaImagens.map((img, idx) => `
             <div class="galeria-item tamanho-${img.tamanho}" data-img-index="${idx}">
                 <img src="${img.url}" alt="${img.desc}" loading="lazy">
                 <div class="overlay-text"><i class="fas fa-camera"></i> ${img.desc}</div>
             </div>
         `).join('');
+        
         document.querySelectorAll(".galeria-item").forEach(item => {
             item.addEventListener("click", function() {
                 const idx = this.getAttribute("data-img-index");
@@ -1516,11 +1627,17 @@
     function renderListaGaleriaAdmin() {
         const container = document.getElementById("listaGaleria");
         if(!container) return;
+        
+        if(galeriaImagens.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#8a9a84;">Nenhuma imagem cadastrada.</p>';
+            return;
+        }
+        
         container.innerHTML = galeriaImagens.map((img, idx) => `
             <div class="item-card">
                 <div class="item-info">
                     <h4>${img.desc}</h4>
-                    <p>Tamanho: ${img.tamanho}</p>
+                    <p>Tamanho: ${img.tamanho === 'p' ? 'Pequeno' : img.tamanho === 'm' ? 'Médio' : img.tamanho === 'g' ? 'Grande' : 'Extra Grande'}</p>
                 </div>
                 <div class="item-actions">
                     <button class="btn-danger" onclick="removerImagemGaleria(${idx})">Excluir</button>
@@ -1668,24 +1785,46 @@
     
     function adicionarImagemGaleria(event) {
         event.preventDefault();
-        galeriaImagens.push({
+        
+        // VERIFICAR LIMITE MÁXIMO DE IMAGENS
+        if(galeriaImagens.length >= MAX_GALERIA_IMAGENS) {
+            alert(`⚠️ Limite máximo de ${MAX_GALERIA_IMAGENS} imagens atingido! Remova alguma imagem antes de adicionar outra.`);
+            return;
+        }
+        
+        const novaImagem = {
             url: document.getElementById('galeriaUrl').value,
             desc: document.getElementById('galeriaDesc').value,
             tamanho: document.getElementById('galeriaTamanho').value
-        });
+        };
+        
+        galeriaImagens.push(novaImagem);
         saveGaleria();
         renderGaleria();
         renderListaGaleriaAdmin();
         document.getElementById('formGaleria').reset();
-        alert("Imagem adicionada!");
+        
+        // Verificar se atingiu o mínimo
+        if(galeriaImagens.length >= MIN_GALERIA_IMAGENS) {
+            alert(`✅ Imagem adicionada! Agora a galeria tem ${galeriaImagens.length} imagens (mínimo ${MIN_GALERIA_IMAGENS} - máximo ${MAX_GALERIA_IMAGENS})`);
+        } else {
+            alert(`📸 Imagem adicionada! Faltam ${MIN_GALERIA_IMAGENS - galeriaImagens.length} imagens para atingir o mínimo de ${MIN_GALERIA_IMAGENS}.`);
+        }
     }
     
     function removerImagemGaleria(idx) {
-        if(confirm("Remover esta imagem?")) {
+        if(confirm("Remover esta imagem da galeria?")) {
+            const removendo = galeriaImagens.length;
             galeriaImagens.splice(idx, 1);
             saveGaleria();
             renderGaleria();
             renderListaGaleriaAdmin();
+            
+            if(galeriaImagens.length < MIN_GALERIA_IMAGENS) {
+                alert(`⚠️ Atenção! A galeria agora tem ${galeriaImagens.length} imagens. O mínimo recomendado é ${MIN_GALERIA_IMAGENS}.`);
+            } else {
+                alert(`Imagem removida! Agora a galeria tem ${galeriaImagens.length} imagens.`);
+            }
         }
     }
     
