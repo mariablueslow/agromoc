@@ -1033,7 +1033,7 @@ url('https://i.pinimg.com/736x/ef/62/d8/ef62d83bb0282544c725dee496344079.jpg') c
         .footer-col h4 {
             font-size: 1.2rem;
             margin-bottom: 18px;
-            color: #caf0c5;
+            color: #ffffff;
         }
         .copyright {
             text-align: center;
@@ -1044,12 +1044,14 @@ url('https://i.pinimg.com/736x/ef/62/d8/ef62d83bb0282544c725dee496344079.jpg') c
         }
 
         @media (max-width: 700px) {
+
             .hero-content h2 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
-            nav {
-                gap: 18px;
-                flex-wrap: wrap;
+        
+         nav {
+            gap: 18px;
+            flex-wrap: wrap;
             }
         }
 
@@ -1097,6 +1099,11 @@ body {
     backdrop-filter: blur(4px);
     margin-top: 20px;
 }
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -1137,7 +1144,6 @@ body {
     </div>
     
     <a onclick="showPage('galeria')"><i class="fas fa-images"></i> Galeria</a>
-    <a onclick="showPage('admin')"><i class="fas fa-cog"></i> Admin</a>
     <a href="https://wa.me/5538999555854?text=Olá!%20Gostaria%20de%20mais%20informações" target="_blank"><i class="fab fa-whatsapp"></i> Contato</a>
     
     <div class="cart-icon" id="cartIcon">
@@ -1171,7 +1177,7 @@ body {
     <div class="container" id="produtosSectionHome">
         <div class="produtos-destaque">
             <h2 class="section-title">Nossos Produtos</h2>
-            <div class="subhead" id="categoriaAtivaTextoHome">⭐ Seleção especial com os melhores insumos, equipamentos e nutrição animal ⭐</div>
+            <div class="subhead" id="categoriaAtivaTextoHome"> Seleção especial com os melhores insumos, equipamentos e nutrição animal </div>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper" id="produtosWrapperHome"></div>
                 <div class="swiper-pagination"></div>
@@ -1186,7 +1192,7 @@ body {
             <div class="feature-item">
                 <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
                 <h4>Entrega Rápida</h4>
-                <p>Frete grátis para Sul e Sudeste em compras acima de R$ 300</p>
+                <p>Realizamos suas entregas com velocidade e eficiencia</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon"><i class="fas fa-seedling"></i></div>
@@ -1196,7 +1202,8 @@ body {
             <div class="feature-item">
                 <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
                 <h4>Suporte Técnico</h4>
-                <p>Engenheiros agrônomos para orientação personalizada</p>
+                <p>Equipe especializada para orientar suas escolhas no campo
+                </p>
             </div>
         </div>
     </div>
@@ -1217,7 +1224,7 @@ body {
 <div id="galeriaPage" class="page">
     <div class="galeria-page">
         <h2 class="section-title">Nossa Galeria</h2>
-        <div class="subhead">MOMENTOS · ESTRUTURA · INSPIRAÇÃO</div>
+        <div class="subhead"> 
         <!-- CONTADOR OCULTO - NÃO APARECE PARA O CLIENTE -->
         <div class="galeria-flex" id="galeriaFlex"></div>
     </div>
@@ -1268,7 +1275,7 @@ body {
                 </div>
                 <div class="form-group">
                     <label>Badge (destaque)</label>
-                    <input type="text" id="prodBadge" placeholder="Ex: 🔥 Mais vendido">
+                    <input type="text" id="prodBadge" placeholder="Ex:  Mais vendido">
                 </div>
                 <button type="submit" class="btn-primary">Adicionar Produto</button>
             </form>
@@ -1521,7 +1528,7 @@ body {
             </div>
         `).join('');
         document.querySelectorAll(".btn-oferta").forEach(btn => {
-            btn.addEventListener("click", () => alert("🔥 Oferta! Adicione ao carrinho."));
+            btn.addEventListener("click", () => alert(" Oferta! Adicione ao carrinho."));
         });
     }
     
@@ -1541,7 +1548,7 @@ body {
                 <div class="produto">
                     <div class="img-container">
                         <img src="${prod.img}" alt="${prod.nome}">
-                        <div class="badge">${prod.badge || "⭐ Destaque"}</div>
+                        <div class="badge">${prod.badge || " Destaque"}</div>
                     </div>
                     <h3>${prod.nome}</h3>
                     <p>${prod.desc}</p>
@@ -1746,7 +1753,7 @@ body {
             precoStr: `R$ ${parseFloat(document.getElementById('prodPreco').value).toFixed(2).replace('.', ',')}`,
             desc: document.getElementById('prodDesc').value,
             img: document.getElementById('prodImg').value || "https://placehold.co/600x400/2e7d32/white?text=Agromoc",
-            badge: document.getElementById('prodBadge').value || "⭐ Novo",
+            badge: document.getElementById('prodBadge').value || " Novo",
             categoria: document.getElementById('prodCategoria').value,
             opcoes: []
         };
