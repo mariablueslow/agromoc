@@ -40,7 +40,7 @@
             color: #b7e4c7;
         }
 
-        /* HEADER com apenas logo e carrinho */
+        /* HEADER */
         header {
             background: linear-gradient(135deg, #0f3b14 0%, #1c5e24 100%);
             color: white;
@@ -64,7 +64,26 @@
             margin: 0;
         }
         
-        /* CARRINHO NA LATERAL SUPERIOR */
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .home-icon, .login-icon {
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .home-icon:hover, .login-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
         .cart-icon {
             position: relative;
             cursor: pointer;
@@ -89,9 +108,6 @@
             min-width: 20px;
             text-align: center;
         }
-        .cart-icon i {
-            font-size: 1.2rem;
-        }
 
         .container {
             max-width: 1200px;
@@ -99,27 +115,27 @@
             padding: 30px 20px;
         }
         
-        /* TÍTULO DOS PRODUTOS */
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #064714;
+            font-weight: 800;
         }
 
-        /* LISTA DE PRODUTOS - vertical um abaixo do outro */
+        /* LISTA DE PRODUTOS */
         .produtos-lista-vertical {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
         .produto-item {
             background: white;
             border-radius: 12px;
-            padding: 12px 15px;
+            padding: 15px 18px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 1px solid #c8e6c9;
             transition: 0.2s;
@@ -128,55 +144,92 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transform: translateX(5px);
         }
+        
+        /* ESTILO 3D PARA IMAGENS DE RAÇÃO */
         .produto-img {
-            width: 70px;
-            height: 70px;
+            width: 85px;
+            height: 85px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        /* Efeito 3D específico para imagens de ração */
+        .produto-item.racao-item .produto-img {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 0 2px rgba(46,125,50,0.3);
+            transform: perspective(500px) rotateX(2deg) rotateY(2deg);
+        }
+        
+        .produto-item.racao-item:hover .produto-img {
+            transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25), 0 0 0 3px #f5a623;
+        }
+        
+        /* Container 3D para efeito extra */
+        .img-3d-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .img-3d-container::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+            border-radius: 12px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
         .produto-info {
             flex: 2;
         }
         .produto-info h3 {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #1f4f24;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
         .produto-desc {
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             color: #6b7a64;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
         .produto-peso {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: #2e7d32;
             font-weight: 600;
             background: #e8f5e9;
             display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 3px 10px;
+            border-radius: 15px;
         }
         .produto-preco {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: #1b5e20;
-            min-width: 100px;
+            min-width: 110px;
             text-align: right;
         }
         .produto-botoes {
             display: flex;
-            gap: 8px;
-            min-width: 160px;
+            gap: 10px;
+            min-width: 180px;
         }
         .btn-comprar {
             background: #25D366;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 18px;
             border-radius: 25px;
-            font-weight: 600;
+            font-weight: 700;
             color: white;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             transition: 0.2s;
         }
         .btn-comprar:hover {
@@ -186,32 +239,31 @@
         .btn-ver-opcoes {
             background: #2e7d32;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 18px;
             border-radius: 25px;
-            font-weight: 600;
+            font-weight: 700;
             color: white;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             transition: 0.2s;
         }
         .btn-ver-opcoes:hover {
             background: #1b5e20;
         }
 
-        /* Botão adicionar mais produtos */
         .add-produto-btn {
             background: #2e7d32;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
+            padding: 14px 28px;
+            border-radius: 35px;
             font-weight: bold;
             cursor: pointer;
-            margin: 20px auto 0;
+            margin: 25px auto 0;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 10px;
+            font-size: 0.95rem;
             transition: 0.3s;
         }
         .add-produto-btn:hover {
@@ -248,24 +300,48 @@
             align-items: center;
         }
         .modal-header h3 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         .close-modal {
             font-size: 1.5rem;
             cursor: pointer;
         }
         .modal-body {
-            padding: 15px;
-            max-height: 60vh;
-            overflow-y: auto;
+            padding: 20px;
         }
-        .modal-img {
+        
+        /* Efeito 3D no modal para ração */
+        .modal-img.racao-modal-img {
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            transform: perspective(500px) rotateX(2deg);
+            transition: transform 0.3s ease;
+        }
+        .modal-img.racao-modal-img:hover {
+            transform: perspective(500px) rotateX(0deg) scale(1.02);
+        }
+        
+        .login-input {
             width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
         }
+        .btn-login {
+            background: #25D366;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
         .opcao-item {
             background: #f5fbf2;
             border-radius: 10px;
@@ -276,15 +352,6 @@
         }
         .opcao-item:hover {
             background: #e8f3e5;
-        }
-        .opcao-item h4 {
-            font-size: 0.9rem;
-            color: #17461e;
-        }
-        .opcao-preco {
-            color: #2e7d32;
-            font-weight: 700;
-            font-size: 0.9rem;
         }
 
         /* CARRINHO LATERAL */
@@ -339,15 +406,6 @@
         .cart-item-info {
             flex: 1;
         }
-        .cart-item-info h4 {
-            font-size: 0.8rem;
-            color: #17461e;
-        }
-        .cart-item-price {
-            color: #2e7d32;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
         .cart-item-quantity {
             display: flex;
             align-items: center;
@@ -365,7 +423,7 @@
         .remove-item {
             color: #c45c1a;
             cursor: pointer;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             margin-top: 3px;
         }
         .cart-footer {
@@ -373,7 +431,7 @@
             border-top: 1px solid #e0e8dc;
         }
         .cart-total {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 800;
             margin-bottom: 10px;
             display: flex;
@@ -382,7 +440,7 @@
         .btn-finalizar {
             background: #25D366;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 30px;
             font-weight: 700;
@@ -413,8 +471,8 @@
             bottom: 20px;
             right: 20px;
             background: #25D366;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -424,14 +482,14 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .whatsapp-fixo i {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: white;
         }
 
         .newsletter {
             background: #0e3313;
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             margin-top: 30px;
             text-align: center;
             color: white;
@@ -444,15 +502,15 @@
         }
         .news-group input {
             flex: 2;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 30px;
             border: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         .news-group button {
             background: #f4b942;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
@@ -473,21 +531,25 @@
             gap: 20px;
         }
         .footer-col h4 {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 12px;
             color: #f4b942;
-        }
-        .footer-col p, .footer-col a {
-            font-size: 0.75rem;
-            color: #c8e6c9;
-            text-decoration: none;
         }
         .copyright {
             text-align: center;
             border-top: 1px solid #2b5530;
             padding-top: 15px;
             margin-top: 20px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
 
         @media (max-width: 768px) {
@@ -513,6 +575,9 @@
     <div class="contact-info">
         <span><i class="fas fa-tractor"></i> Entrega para todo o Brasil</span>
     </div>
+    <div class="notif-info">
+        <span><i class="fas fa-bell"></i> Cadastre-se e receba novidades</span>
+    </div>
 </div>
 
 <header>
@@ -520,9 +585,19 @@
         <h1><i class="fas fa-leaf"></i> Agromoc</h1>
         <p>Agro inteligente | Tradição e inovação</p>
     </div>
-    <div class="cart-icon" id="cartIcon">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count" id="cartCount">0</span>
+    <div class="header-icons">
+        <div class="home-icon" id="homeIcon">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </div>
+        <div class="login-icon" id="loginIcon">
+            <i class="fas fa-user-circle"></i>
+            <span id="loginStatusText">Entrar</span>
+        </div>
+        <div class="cart-icon" id="cartIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
     </div>
 </header>
 
@@ -541,9 +616,10 @@
 <!-- NEWSLETTER -->
 <div class="container">
     <div class="newsletter">
-        <h3><i class="fas fa-envelope-open-text"></i> Receba ofertas</h3>
+        <h3><i class="fas fa-envelope-open-text"></i> Receba ofertas e novidades</h3>
+        <p>Cadastre-se e fique por dentro de lançamentos e descontos</p>
         <div class="news-group">
-            <input type="email" placeholder="Seu e-mail" id="emailNews">
+            <input type="email" placeholder="Seu melhor e-mail" id="emailNews">
             <button id="btnNews">Inscrever</button>
         </div>
     </div>
@@ -571,6 +647,25 @@
     <i class="fab fa-whatsapp"></i>
 </a>
 
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-circle"></i> Login / Cadastro</h3>
+            <span class="close-modal close-login">&times;</span>
+        </div>
+        <div class="modal-body">
+            <input type="text" id="loginNome" class="login-input" placeholder="Seu nome">
+            <input type="email" id="loginEmail" class="login-input" placeholder="Seu e-mail">
+            <input type="tel" id="loginTelefone" class="login-input" placeholder="WhatsApp (opcional)">
+            <button class="btn-login" id="btnSalvarLogin">Cadastrar / Entrar</button>
+            <div class="login-message" style="text-align:center; font-size:0.8rem; color:#666; margin-top:10px;">
+                <i class="fas fa-bell"></i> Após cadastro, você receberá notificações de ofertas!
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- MODAL PRODUTO -->
 <div id="produtoModal" class="modal">
     <div class="modal-content">
@@ -581,7 +676,7 @@
         <div class="modal-body">
             <img id="modalProdutoImg" class="modal-img" src="" alt="">
             <div id="modalOpcoes"></div>
-            <button class="btn-comprar-modal" id="btnComprarModal" style="background:#25D366; width:100%; padding:10px; border:none; border-radius:25px; font-weight:bold; margin-top:10px;">
+            <button class="btn-comprar-modal" id="btnComprarModal" style="background:#25D366; width:100%; padding:12px; border:none; border-radius:25px; font-weight:bold; margin-top:10px; font-size:1rem;">
                 Adicionar ao Carrinho
             </button>
         </div>
@@ -596,12 +691,12 @@
             <span class="close-modal close-add-modal">&times;</span>
         </div>
         <div class="modal-body">
-            <input type="text" id="novoNome" placeholder="Nome do produto" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
-            <textarea id="novaDesc" placeholder="Descrição" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc; rows:2"></textarea>
-            <input type="text" id="novoPeso" placeholder="Peso (ex: 5kg, 500g, 10kg)" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
-            <input type="number" id="novoPreco" placeholder="Preço (R$)" step="0.01" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
-            <input type="text" id="novaImagem" placeholder="URL da imagem" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;" value="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=200&h=200&fit=crop">
-            <select id="novaCategoria" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+            <input type="text" id="novoNome" placeholder="Nome do produto" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+            <textarea id="novaDesc" placeholder="Descrição" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc; rows:2"></textarea>
+            <input type="text" id="novoPeso" placeholder="Peso (ex: 5kg, 500g, 10kg)" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+            <input type="number" id="novoPreco" placeholder="Preço (R$)" step="0.01" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+            <input type="text" id="novaImagem" placeholder="URL da imagem" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;" value="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=200&h=200&fit=crop">
+            <select id="novaCategoria" style="width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
                 <option value="racao">Ração</option>
                 <option value="equipamentos">Equipamentos</option>
                 <option value="defensivos">Defensivos</option>
@@ -609,7 +704,7 @@
                 <option value="ferramentas">Ferramentas</option>
                 <option value="sementes">Sementes</option>
             </select>
-            <button id="btnSalvarNovoProduto" style="background:#25D366; width:100%; padding:12px; border:none; border-radius:25px; font-weight:bold; color:white; cursor:pointer;">
+            <button id="btnSalvarNovoProduto" style="background:#25D366; width:100%; padding:14px; border:none; border-radius:25px; font-weight:bold; color:white; cursor:pointer; font-size:1rem;">
                 Salvar Produto
             </button>
         </div>
@@ -632,34 +727,108 @@
             <span id="cartTotal">R$ 0,00</span>
         </div>
         <button class="btn-finalizar" id="finalizarCompra">
-            <i class="fab fa-whatsapp"></i> Finalizar
+            <i class="fab fa-whatsapp"></i> Finalizar Compra
         </button>
     </div>
 </div>
 
 <script>
-    // PRODUTOS COM MAIS ITENS
+    // SISTEMA DE LOGIN
+    let usuarioLogado = null;
+    
+    function carregarUsuario() {
+        const saved = localStorage.getItem('agromocUsuario');
+        if(saved) {
+            usuarioLogado = JSON.parse(saved);
+            atualizarInterfaceLogin();
+            const ultimaNotificacao = localStorage.getItem('ultimaNotificacao');
+            const hoje = new Date().toDateString();
+            if(ultimaNotificacao !== hoje) {
+                setTimeout(() => {
+                    mostrarNotificacao(`Olá ${usuarioLogado.nome}! 🎉 Temos novidades para você!`);
+                }, 2000);
+            }
+        }
+    }
+    
+    function atualizarInterfaceLogin() {
+        const loginStatusText = document.getElementById('loginStatusText');
+        if(usuarioLogado) {
+            loginStatusText.innerHTML = `${usuarioLogado.nome.split(' ')[0]}`;
+            document.getElementById('loginIcon').innerHTML = `<i class="fas fa-user-check"></i><span>${usuarioLogado.nome.split(' ')[0]}</span>`;
+        } else {
+            loginStatusText.innerHTML = 'Entrar';
+            document.getElementById('loginIcon').innerHTML = `<i class="fas fa-user-circle"></i><span>Entrar</span>`;
+        }
+    }
+    
+    function mostrarNotificacao(mensagem) {
+        const notificacao = document.createElement('div');
+        notificacao.style.cssText = `
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: #2e7d32;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        `;
+        notificacao.innerHTML = `<i class="fas fa-bell"></i> ${mensagem}`;
+        document.body.appendChild(notificacao);
+        
+        setTimeout(() => {
+            notificacao.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notificacao.remove(), 300);
+        }, 5000);
+    }
+    
+    function salvarUsuario(nome, email, telefone) {
+        usuarioLogado = { nome, email, telefone, dataCadastro: new Date().toISOString() };
+        localStorage.setItem('agromocUsuario', JSON.stringify(usuarioLogado));
+        localStorage.setItem('ultimaNotificacao', new Date().toDateString());
+        atualizarInterfaceLogin();
+        mostrarNotificacao(`Bem-vindo ${nome}! 🎉 Você receberá nossas novidades!`);
+    }
+    
+    function fazerLogout() {
+        usuarioLogado = null;
+        localStorage.removeItem('agromocUsuario');
+        atualizarInterfaceLogin();
+        mostrarNotificacao('Você saiu da sua conta. Até logo! 👋');
+    }
+    
+    // PRODUTOS COM IMAGENS 3D PARA RAÇÃO
     let produtosData = {
         todos: [
-            { id: 1, nome: "Ração Premium para Cães", desc: "Alta digestibilidade e nutrientes essenciais", peso: "5kg", preco: 129.90, precoStr: "R$ 129,90", img: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=200&h=200&fit=crop", categoria: "racao",
+            { id: 1, nome: "Ração Premium para Cães", desc: "Alta digestibilidade e nutrientes essenciais para seu pet", peso: "5kg", preco: 129.90, precoStr: "R$ 129,90", img: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=200&h=200&fit=crop", categoria: "racao", is3d: true,
               opcoes: [{ nome: "5kg", preco: 129.90, precoStr: "R$ 129,90" }, { nome: "10kg", preco: 239.90, precoStr: "R$ 239,90" }, { nome: "20kg", preco: 449.90, precoStr: "R$ 449,90" }] },
-            { id: 2, nome: "Botina Agro Forte", desc: "Couro hidrorrepelente, biqueira de aço", peso: "Tamanhos 38-42", preco: 259.90, precoStr: "R$ 259,90", img: "https://images.unsplash.com/photo-1543163521-9145f931371e?w=200&h=200&fit=crop", categoria: "equipamentos",
+            { id: 2, nome: "Botina Agro Forte", desc: "Couro hidrorrepelente, biqueira de aço para máxima proteção", peso: "Tamanhos 38-42", preco: 259.90, precoStr: "R$ 259,90", img: "https://images.unsplash.com/photo-1543163521-9145f931371e?w=200&h=200&fit=crop", categoria: "equipamentos", is3d: false,
               opcoes: [{ nome: "Tamanho 38", preco: 259.90, precoStr: "R$ 259,90" }, { nome: "Tamanho 39", preco: 259.90, precoStr: "R$ 259,90" }, { nome: "Tamanho 40", preco: 259.90, precoStr: "R$ 259,90" }] },
-            { id: 3, nome: "Defensivo BioNativo", desc: "Controle biológico de pragas", peso: "500ml", preco: 84.90, precoStr: "R$ 84,90", img: "https://images.unsplash.com/photo-1595455707802-21b258e4e9f7?w=200&h=200&fit=crop", categoria: "defensivos",
+            { id: 3, nome: "Defensivo BioNativo", desc: "Controle biológico de pragas, 100% orgânico", peso: "500ml", preco: 84.90, precoStr: "R$ 84,90", img: "https://images.unsplash.com/photo-1595455707802-21b258e4e9f7?w=200&h=200&fit=crop", categoria: "defensivos", is3d: false,
               opcoes: [{ nome: "500ml", preco: 84.90, precoStr: "R$ 84,90" }, { nome: "1L", preco: 149.90, precoStr: "R$ 149,90" }, { nome: "5L", preco: 649.90, precoStr: "R$ 649,90" }] },
-            { id: 4, nome: "Vermífugo Equino", desc: "Proteção contra parasitas internos", peso: "Unidade", preco: 45.90, precoStr: "R$ 45,90", img: "https://images.unsplash.com/photo-1587854692152-cbe660dbde0e?w=200&h=200&fit=crop", categoria: "veterinaria",
+            { id: 4, nome: "Vermífugo Equino", desc: "Proteção completa contra parasitas internos e externos", peso: "Unidade", preco: 45.90, precoStr: "R$ 45,90", img: "https://images.unsplash.com/photo-1587854692152-cbe660dbde0e?w=200&h=200&fit=crop", categoria: "veterinaria", is3d: false,
               opcoes: [{ nome: "Unidade", preco: 45.90, precoStr: "R$ 45,90" }, { nome: "Kit 3 unid", preco: 129.90, precoStr: "R$ 129,90" }] },
-            { id: 5, nome: "Feno Alfafa Premium", desc: "Rico em fibras para equinos", peso: "12kg", preco: 74.90, precoStr: "R$ 74,90", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=200&h=200&fit=crop", categoria: "racao",
+            { id: 5, nome: "Ração Cavalo Atleta", desc: "Complexo vitamínico para equinos de alta performance", peso: "15kg", preco: 189.90, precoStr: "R$ 189,90", img: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=200&h=200&fit=crop", categoria: "racao", is3d: true,
+              opcoes: [{ nome: "15kg", preco: 189.90, precoStr: "R$ 189,90" }, { nome: "25kg", preco: 299.90, precoStr: "R$ 299,90" }] },
+            { id: 6, nome: "Feno Alfafa Premium", desc: "Rico em fibras, ideal para equinos e pequenos ruminantes", peso: "12kg", preco: 74.90, precoStr: "R$ 74,90", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=200&h=200&fit=crop", categoria: "racao", is3d: true,
               opcoes: [{ nome: "12kg", preco: 74.90, precoStr: "R$ 74,90" }, { nome: "25kg", preco: 139.90, precoStr: "R$ 139,90" }] },
-            { id: 6, nome: "Foice e Podão Profissional", desc: "Ferramentas para poda e roçado", peso: "Kit completo", preco: 119.90, precoStr: "R$ 119,90", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=200&h=200&fit=crop", categoria: "ferramentas",
+            { id: 7, nome: "Foice e Podão Profissional", desc: "Ferramentas para poda e roçado com lâmina de aço", peso: "Kit completo", preco: 119.90, precoStr: "R$ 119,90", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=200&h=200&fit=crop", categoria: "ferramentas", is3d: false,
               opcoes: [{ nome: "Kit Básico", preco: 119.90, precoStr: "R$ 119,90" }, { nome: "Kit Completo", preco: 189.90, precoStr: "R$ 189,90" }] },
-            { id: 7, nome: "Semente de Milho Híbrido", desc: "Alta produtividade e resistência", peso: "1kg", preco: 89.90, precoStr: "R$ 89,90", img: "https://images.unsplash.com/photo-1595540797194-0d6f427d8cbd?w=200&h=200&fit=crop", categoria: "sementes",
+            { id: 8, nome: "Semente de Milho Híbrido", desc: "Alta produtividade e resistência a pragas", peso: "1kg", preco: 89.90, precoStr: "R$ 89,90", img: "https://images.unsplash.com/photo-1595540797194-0d6f427d8cbd?w=200&h=200&fit=crop", categoria: "sementes", is3d: false,
               opcoes: [{ nome: "1kg", preco: 89.90, precoStr: "R$ 89,90" }, { nome: "5kg", preco: 399.90, precoStr: "R$ 399,90" }, { nome: "10kg", preco: 749.90, precoStr: "R$ 749,90" }] },
-            { id: 8, nome: "Vitamina para Aves", desc: "Suplemento vitamínico completo", peso: "500g", preco: 34.90, precoStr: "R$ 34,90", img: "https://images.unsplash.com/photo-1569529467221-2d96fa3adcda?w=200&h=200&fit=crop", categoria: "veterinaria",
+            { id: 9, nome: "Vitamina para Aves", desc: "Suplemento vitamínico completo para aves", peso: "500g", preco: 34.90, precoStr: "R$ 34,90", img: "https://images.unsplash.com/photo-1569529467221-2d96fa3adcda?w=200&h=200&fit=crop", categoria: "veterinaria", is3d: false,
               opcoes: [{ nome: "500g", preco: 34.90, precoStr: "R$ 34,90" }, { nome: "1kg", preco: 64.90, precoStr: "R$ 64,90" }] },
-            { id: 9, nome: "Arame Farpado", desc: "Cerca de alta resistência", peso: "Rolo 500m", preco: 299.90, precoStr: "R$ 299,90", img: "https://images.unsplash.com/photo-1620567531655-6f7c3a442cfc?w=200&h=200&fit=crop", categoria: "equipamentos",
+            { id: 10, nome: "Arame Farpado", desc: "Cerca de alta resistência para sua propriedade", peso: "Rolo 500m", preco: 299.90, precoStr: "R$ 299,90", img: "https://images.unsplash.com/photo-1620567531655-6f7c3a442cfc?w=200&h=200&fit=crop", categoria: "equipamentos", is3d: false,
               opcoes: [{ nome: "Rolo 250m", preco: 159.90, precoStr: "R$ 159,90" }, { nome: "Rolo 500m", preco: 299.90, precoStr: "R$ 299,90" }] },
-            { id: 10, nome: "Adubo Orgânico", desc: "Fertilizante natural para plantas", peso: "10kg", preco: 49.90, precoStr: "R$ 49,90", img: "https://images.unsplash.com/photo-1585336261022-680e9cef8f2b?w=200&h=200&fit=crop", categoria: "defensivos",
+            { id: 11, nome: "Adubo Orgânico", desc: "Fertilizante natural para todas as plantas", peso: "10kg", preco: 49.90, precoStr: "R$ 49,90", img: "https://images.unsplash.com/photo-1585336261022-680e9cef8f2b?w=200&h=200&fit=crop", categoria: "defensivos", is3d: false,
               opcoes: [{ nome: "5kg", preco: 29.90, precoStr: "R$ 29,90" }, { nome: "10kg", preco: 49.90, precoStr: "R$ 49,90" }, { nome: "25kg", preco: 109.90, precoStr: "R$ 109,90" }] }
         ],
         racao: [], equipamentos: [], defensivos: [], veterinaria: [], ferramentas: [], sementes: []
@@ -712,6 +881,10 @@
         atualizarCarrinhoUI();
         document.getElementById('cartSidebar').classList.add('open');
         document.getElementById('overlay').classList.add('show');
+        
+        if(usuarioLogado) {
+            mostrarNotificacao(`${itemNome} adicionado ao carrinho! 🛒`);
+        }
     }
     
     function removerDoCarrinho(index) {
@@ -779,6 +952,9 @@
             return;
         }
         let mensagem = "🛒 *PEDIDO AGROMOC*\n\n";
+        if(usuarioLogado) {
+            mensagem += `👤 Cliente: ${usuarioLogado.nome}\n📧 Email: ${usuarioLogado.email}\n📱 Tel: ${usuarioLogado.telefone || 'Não informado'}\n\n`;
+        }
         let total = 0;
         carrinho.forEach(item => {
             mensagem += `📦 ${item.nome} x${item.quantidade} = ${item.precoStr}\n`;
@@ -803,8 +979,10 @@
         
         let html = '';
         produtosArray.forEach(prod => {
+            // Adiciona classe especial para produtos de ração (efeito 3D)
+            const racaoClass = prod.categoria === 'racao' ? 'racao-item' : '';
             html += `
-                <div class="produto-item">
+                <div class="produto-item ${racaoClass}" data-produto-id="${prod.id}">
                     <img src="${prod.img}" class="produto-img" alt="${prod.nome}">
                     <div class="produto-info">
                         <h3>${prod.nome}</h3>
@@ -822,7 +1000,8 @@
         container.innerHTML = html;
         
         document.querySelectorAll(".btn-comprar").forEach(btn => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 const id = parseInt(btn.getAttribute("data-produto-id"));
                 const produto = produtosData.todos.find(p => p.id === id);
                 if(produto) adicionarAoCarrinho(produto, null);
@@ -830,7 +1009,8 @@
         });
         
         document.querySelectorAll(".btn-ver-opcoes").forEach(btn => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 const id = parseInt(btn.getAttribute("data-produto-id"));
                 const produto = produtosData.todos.find(p => p.id === id);
                 if(produto) abrirModal(produto);
@@ -844,6 +1024,14 @@
         const modal = document.getElementById("produtoModal");
         document.getElementById("modalProdutoNome").innerText = produto.nome;
         document.getElementById("modalProdutoImg").src = produto.img;
+        
+        // Adiciona efeito 3D no modal se for ração
+        const modalImg = document.getElementById("modalProdutoImg");
+        if(produto.categoria === 'racao') {
+            modalImg.classList.add('racao-modal-img');
+        } else {
+            modalImg.classList.remove('racao-modal-img');
+        }
         
         let opcoesHtml = '<h4 style="margin-bottom:10px;">Opções disponíveis:</h4>';
         produto.opcoes.forEach((op, idx) => {
@@ -867,30 +1055,70 @@
         modal.style.display = "block";
     }
     
-    // MODAL
-    const modal = document.getElementById("produtoModal");
-    document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
-    window.onclick = (event) => { if(event.target == modal) modal.style.display = "none"; }
+    // MODAIS
+    const modalProduto = document.getElementById("produtoModal");
+    document.querySelectorAll(".close-modal").forEach(btn => {
+        if(btn.classList.contains('close-login')) return;
+        btn.onclick = () => modalProduto.style.display = "none";
+    });
+    window.onclick = (event) => { if(event.target == modalProduto) modalProduto.style.display = "none"; }
     document.getElementById("btnComprarModal").addEventListener("click", () => {
         if(produtoSelecionado) {
             adicionarAoCarrinho(produtoSelecionado, opcaoSelecionadaGlobal);
-            modal.style.display = "none";
+            modalProduto.style.display = "none";
         }
     });
     
-    // ADICIONAR PRODUTO
-    let nextId = 11;
+    // LOGIN MODAL
+    const loginModal = document.getElementById("loginModal");
+    document.getElementById("loginIcon").addEventListener("click", () => {
+        if(usuarioLogado) {
+            if(confirm(`Deseja sair da conta, ${usuarioLogado.nome}?`)) {
+                fazerLogout();
+            }
+        } else {
+            loginModal.style.display = "block";
+        }
+    });
+    document.querySelector(".close-login").addEventListener("click", () => {
+        loginModal.style.display = "none";
+    });
+    document.getElementById("btnSalvarLogin").addEventListener("click", () => {
+        const nome = document.getElementById("loginNome").value.trim();
+        const email = document.getElementById("loginEmail").value.trim();
+        const telefone = document.getElementById("loginTelefone").value.trim();
+        
+        if(!nome || !email) {
+            alert("Preencha nome e e-mail!");
+            return;
+        }
+        if(!email.includes("@")) {
+            alert("E-mail inválido!");
+            return;
+        }
+        salvarUsuario(nome, email, telefone);
+        loginModal.style.display = "none";
+        
+        document.getElementById("loginNome").value = "";
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginTelefone").value = "";
+    });
     
+    // HOME ICON
+    document.getElementById("homeIcon").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // ADICIONAR PRODUTO
+    let nextId = 12;
     document.getElementById("btnAddProduto").addEventListener("click", () => {
         document.getElementById("addProdutoModal").style.display = "block";
     });
-    
     document.querySelectorAll(".close-add-modal").forEach(btn => {
         btn.addEventListener("click", () => {
             document.getElementById("addProdutoModal").style.display = "none";
         });
     });
-    
     document.getElementById("btnSalvarNovoProduto").addEventListener("click", () => {
         const nome = document.getElementById("novoNome").value;
         const desc = document.getElementById("novaDesc").value;
@@ -913,6 +1141,7 @@
             precoStr: `R$ ${preco.toFixed(2).replace('.', ',')}`,
             img: imagem || "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=200&h=200&fit=crop",
             categoria: categoria,
+            is3d: categoria === 'racao',
             opcoes: [{ nome: peso || "Padrão", preco: preco, precoStr: `R$ ${preco.toFixed(2).replace('.', ',')}` }]
         };
         
@@ -922,7 +1151,6 @@
         
         document.getElementById("addProdutoModal").style.display = "none";
         
-        // Limpar campos
         document.getElementById("novoNome").value = "";
         document.getElementById("novaDesc").value = "";
         document.getElementById("novoPeso").value = "";
@@ -931,7 +1159,7 @@
         alert("Produto adicionado com sucesso!");
     });
     
-    // EVENTOS
+    // EVENTOS CARRINHO
     document.getElementById("cartIcon").addEventListener("click", () => {
         document.getElementById('cartSidebar').classList.add('open');
         document.getElementById('overlay').classList.add('show');
@@ -945,15 +1173,25 @@
         document.getElementById('overlay').classList.remove('show');
     });
     document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra);
+    
+    // NEWSLETTER
     document.getElementById("btnNews").addEventListener("click", () => {
         const email = document.getElementById("emailNews").value;
-        if(email.includes("@")) alert("Inscrito com sucesso!");
-        else alert("E-mail inválido");
+        if(email && email.includes("@")) {
+            alert("✅ Inscrito com sucesso! Você receberá nossas novidades.");
+            document.getElementById("emailNews").value = "";
+            if(usuarioLogado) {
+                mostrarNotificacao(`Obrigado por se inscrever, ${usuarioLogado.nome}!`);
+            }
+        } else {
+            alert("E-mail inválido!");
+        }
     });
     
     // INICIALIZAR
     renderProducts("todos");
     carregarCarrinho();
+    carregarUsuario();
 </script>
 </body>
 </html>
