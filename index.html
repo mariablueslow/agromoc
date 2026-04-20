@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Agromoc | Loja Rural Premium</title>
+    <title>Agromoc | Loja Premium</title>
     
     <!-- Swiper JS + CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -12,6 +12,9 @@
     <!-- Google Fonts + Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     
     <style>
         * {
@@ -31,34 +34,31 @@
         .top-bar {
             background: #0a2f0e;
             padding: 8px 24px;
-            font-size: 0.85rem;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            color: #ffffff;
-            gap: 12px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .top-bar i {
-            margin-right: 6px;
-            color: #b7e4c7;
+        .top-bar .left {
+            letter-spacing: 0.5px;
         }
 
         header {
             background: linear-gradient(135deg, #0f3b14 0%, #1c5e24 100%);
             color: white;
-            padding: 24px 32px;
+            padding: 20px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 2;
         }
         .logo-area h1 {
             font-size: 2rem;
-            letter-spacing: -0.5px;
             font-weight: 800;
             background: linear-gradient(120deg, #fff, #c8f0d2);
             background-clip: text;
@@ -73,20 +73,21 @@
         .search-box {
             background: rgba(255,255,255,0.15);
             border-radius: 60px;
-            padding: 8px 18px;
+            padding: 5px 12px;
             display: flex;
             align-items: center;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.2);
+            width: 200px;
         }
         .search-box input {
             background: transparent;
             border: none;
-            padding: 8px;
-            font-size: 0.9rem;
+            padding: 6px;
+            font-size: 0.85rem;
             color: white;
             outline: none;
-            width: 220px;
+            width: 150px;
         }
         .search-box input::placeholder {
             color: #d9f0de;
@@ -96,7 +97,7 @@
             border: none;
             color: white;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
         nav {
@@ -104,33 +105,32 @@
             backdrop-filter: blur(12px);
             padding: 12px 32px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             gap: 32px;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            flex-wrap: wrap;
+            align-items: center;
         }
-        nav a {
+        nav a, .cart-icon, .user-link {
             color: #1a4a1f;
             text-decoration: none;
             font-weight: 600;
-            transition: 0.2s;
             font-size: 1rem;
-            padding: 6px 0;
-            border-bottom: 2px solid transparent;
             cursor: pointer;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        nav a:hover {
-            border-bottom-color: #000000;
-            color: #0f3b14;
+        nav a:hover, .cart-icon:hover, .user-link:hover {
+            border-bottom-color: #f5a623;
         }
-
         .cart-icon {
             position: relative;
-            cursor: pointer;
         }
         .cart-count {
             position: absolute;
@@ -146,79 +146,15 @@
             text-align: center;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            min-width: 260px;
-            border-radius: 20px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            margin-top: 12px;
-            overflow: hidden;
-            animation: fadeInDown 0.25s ease-out;
-            border: 1px solid rgba(46,125,50,0.2);
-        }
-        .dropdown-content.show {
-            display: block;
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        .dropdown-content a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 22px;
-            color: #1f4a24;
-            border-bottom: 1px solid #f0f4ec;
-            font-weight: 500;
-            transition: all 0.2s;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        .dropdown-content a i {
-            width: 28px;
-            font-size: 1.2rem;
-            color: #000000;
-        }
-        .dropdown-content a:hover {
-            background: #e9f5e6;
-            padding-left: 28px;
-            color: #0a3b10;
-        }
-
         .hero {
-            position: relative;
+            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.pexels.com/photos/1024550/agriculture-field-rural-land-1024550.jpg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
             height: 65vh;
             min-height: 420px;
-            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.pexels.com/photos/1024550/agriculture-field-rural-land-1024550.jpg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            background-attachment: fixed;
-        }
-        .hero-content {
-            animation: fadeUp 1s ease-out;
         }
         .hero-content h2 {
             font-size: 3rem;
@@ -246,11 +182,6 @@
         .btn-hero:hover {
             background: #e0940c;
             transform: scale(1.03);
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .container {
@@ -342,7 +273,6 @@
             border-radius: 50px;
             font-size: 0.8rem;
             z-index: 2;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .img-oferta {
             height: 220px;
@@ -354,16 +284,12 @@
             object-fit: cover;
             transition: transform 0.5s;
         }
-        .card-oferta:hover .img-oferta img {
-            transform: scale(1.05);
-        }
         .info-oferta {
             padding: 20px 20px 24px;
         }
         .info-oferta h3 {
             font-size: 1.4rem;
             color: #2c5e2a;
-            margin-bottom: 8px;
         }
         .preco-original {
             text-decoration: line-through;
@@ -375,7 +301,6 @@
             font-size: 1.7rem;
             font-weight: 800;
             color: #c45c1a;
-            margin: 5px 0;
         }
         .btn-oferta {
             margin-top: 18px;
@@ -412,7 +337,6 @@
         }
         .produto:hover {
             transform: translateY(-12px) scale(1.01);
-            box-shadow: 0 28px 40px -16px rgba(0, 32, 0, 0.25);
         }
         .img-container {
             position: relative;
@@ -445,12 +369,18 @@
             font-size: 1.5rem;
             margin: 20px 20px 8px;
             color: #1f4f24;
-            font-weight: 700;
         }
         .produto p {
             padding: 0 20px;
             color: #4e5e46;
             flex: 1;
+            font-size: 0.85rem;
+        }
+        .produto-marca {
+            color: #c45c1a;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-top: -5px;
         }
         .price-tag {
             font-size: 1.35rem;
@@ -459,38 +389,17 @@
             margin: 12px 0 8px;
         }
         
-        .btn-comprar-produto {
-            background: #25D366;
-            border: none;
-            margin: 8px 20px 8px;
-            padding: 10px 0;
-            border-radius: 40px;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            transition: 0.25s;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .btn-comprar-produto:hover {
-            background: #20b859;
-            gap: 12px;
-        }
-        
         .btn-ver {
             background: #17461e;
             border: none;
             margin: 0px 20px 20px;
-            padding: 10px 0;
+            padding: 12px 0;
             border-radius: 40px;
             font-weight: 700;
             color: white;
             cursor: pointer;
             transition: 0.25s;
-            font-size: 0.9rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -513,7 +422,6 @@
             width: 48px;
             height: 48px;
             border-radius: 60px;
-            box-shadow: 0 8px 20px rgba(60, 204, 103, 0.12);
         }
         .swiper-button-next:after, .swiper-button-prev:after {
             font-size: 1.2rem;
@@ -560,75 +468,62 @@
             height: 100%;
             background-color: rgba(0,0,0,0.7);
             backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         .modal-content {
             background: white;
-            margin: 5% auto;
+            margin: 3% auto;
             width: 90%;
-            max-width: 500px;
+            max-width: 700px;
             border-radius: 32px;
-            animation: slideUp 0.4s ease;
             overflow: hidden;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
-        }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
         .modal-header {
             background: linear-gradient(135deg, #0f3b14, #1c5e24);
             color: white;
-            padding: 24px;
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .modal-header h3 {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
         .close-modal {
             font-size: 2rem;
             cursor: pointer;
-            transition: 0.2s;
-            line-height: 1;
-        }
-        .close-modal:hover {
-            transform: scale(1.2);
-            color: #f4b942;
         }
         .modal-body {
             padding: 24px;
-            max-height: 60vh;
             overflow-y: auto;
+            flex: 1;
         }
-        .modal-img {
+        .modal-img-principal {
             width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 20px;
             margin-bottom: 20px;
         }
-        .modal-preco {
-            font-size: 1.8rem;
-            font-weight: 800;
+        .categoria-opcoes {
+            margin-top: 20px;
+            border-top: 1px solid #e0e8dc;
+            padding-top: 15px;
+        }
+        .categoria-opcoes h4 {
             color: #c45c1a;
-            margin: 15px 0;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
         }
         .opcao-item {
             background: #f5fbf2;
             border-radius: 16px;
-            padding: 16px;
+            padding: 12px;
             margin-bottom: 12px;
             border: 1px solid #e0e8dc;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
             cursor: pointer;
         }
         .opcao-item:hover {
@@ -636,150 +531,132 @@
             transform: translateX(5px);
             border-color: #2e7d32;
         }
-        .opcao-item h4 {
-            color: #17461e;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        .opcao-preco {
-            color: #2e7d32;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-top: 8px;
-        }
-        .btn-comprar-modal {
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-        .btn-comprar-modal:hover {
-            background: #20b859;
-            gap: 15px;
-        }
-
-        /* CARRINHO CORRIGIDO - LARGURA TOTAL EM MOBILE E 400PX EM DESKTOP */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
-            z-index: 10000;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .cart-sidebar.open {
-            right: 0;
-        }
-        @media (min-width: 768px) {
-            .cart-sidebar {
-                max-width: 450px;
-                right: -450px;
-            }
-            .cart-sidebar.open {
-                right: 0;
-            }
-        }
-        .cart-header {
-            background: linear-gradient(135deg, #0f3b14, #1c5e24);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cart-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .close-cart {
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        .cart-item {
-            display: flex;
-            gap: 12px;
-            background: #f5fbf2;
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #e0e8dc;
-        }
-        .cart-item-img {
+        .opcao-img {
             width: 70px;
             height: 70px;
             object-fit: cover;
             border-radius: 12px;
+            background: #ddd;
         }
-        .cart-item-info {
+        .opcao-info {
             flex: 1;
         }
-        .cart-item-info h4 {
-            font-size: 0.9rem;
+        .opcao-info h4 {
             color: #17461e;
+            margin-bottom: 5px;
+            font-size: 1rem;
         }
-        .cart-item-price {
+        .opcao-preco {
             color: #2e7d32;
             font-weight: 700;
+            font-size: 1.1rem;
         }
-        .cart-item-quantity {
+        .opcao-info small {
+            color: #6b7a64;
+            font-size: 0.75rem;
+            display: block;
+        }
+        .btn-comprar-opcao {
+            background: #25D366;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 8px;
+            font-size: 0.85rem;
         }
-        .cart-item-quantity button {
-            background: #e0e8dc;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
+        .btn-comprar-opcao:hover {
+            background: #20b859;
+            gap: 12px;
         }
-        .remove-item {
-            color: #c45c1a;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: inline-block;
+
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
         }
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid #e0e8dc;
+        .checkout-content {
             background: white;
+            margin: 3% auto;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 32px;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .cart-total {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
+        .checkout-header {
+            background: linear-gradient(135deg, #0f3b14, #1c5e24);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .checkout-body {
+            padding: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #17461e;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #2e7d32;
+        }
+        .map-container {
+            margin: 15px 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        #map {
+            height: 250px;
+            width: 100%;
+            border-radius: 16px;
+        }
+        .pix-area {
+            background: #f5fbf2;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #qrcode {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            margin: 15px 0;
         }
-        .btn-finalizar {
+        .pix-codigo {
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            word-break: break-all;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+        }
+        .btn-finalizar-pedido {
             background: #25D366;
             width: 100%;
             padding: 14px;
@@ -788,28 +665,54 @@
             font-weight: 700;
             color: white;
             cursor: pointer;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        .btn-fechar-checkout {
+            background: #ccc;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .resumo-pedido {
+            background: #eef4e6;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .resumo-pedido h4 {
+            margin-bottom: 10px;
+            color: #17461e;
+        }
+
+        .pix-fixo {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            font-weight: bold;
+            transition: 0.3s;
         }
-        .cart-empty {
-            text-align: center;
-            padding: 40px;
-            color: #7a8a74;
+        .pix-fixo:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #128C7E, #25D366);
         }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 9999;
-        }
-        .overlay.show {
-            display: block;
+        .pix-fixo i {
+            font-size: 1.3rem;
         }
 
         .whatsapp-fixo {
@@ -843,6 +746,175 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
+        /* MODAL DE NOTIFICAÇÕES (Cadastro simplificado) */
+        .notify-modal {
+            display: none;
+            position: fixed;
+            z-index: 10002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        .notify-content {
+            background: white;
+            margin: 10% auto;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 32px;
+            overflow: hidden;
+        }
+        .notify-header {
+            background: linear-gradient(135deg, #0f3b14, #1c5e24);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .notify-body {
+            padding: 24px;
+            text-align: center;
+        }
+        .notify-body p {
+            margin-bottom: 20px;
+            color: #4a6741;
+        }
+        .btn-notify {
+            background: #2e7d32;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-notify:hover {
+            background: #1b5e20;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        @media (min-width: 768px) {
+            .cart-sidebar {
+                max-width: 450px;
+                right: -450px;
+            }
+            .cart-sidebar.open {
+                right: 0;
+            }
+        }
+        .cart-header {
+            background: linear-gradient(135deg, #0f3b14, #1c5e24);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .close-cart {
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            background: #f5fbf2;
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .cart-item-quantity button {
+            background: #e0e8dc;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .remove-item {
+            color: #c45c1a;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #e0e8dc;
+        }
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn-finalizar-cart {
+            background: #f5a623;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #2c2c2c;
+            cursor: pointer;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 40px;
+            color: #7a8a74;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+        }
+        .overlay.show {
+            display: block;
+        }
+
         .newsletter {
             background: #0e3313;
             border-radius: 40px;
@@ -865,7 +937,6 @@
             border-radius: 60px;
             border: none;
             font-size: 1rem;
-            outline: none;
         }
         .news-group button {
             background: #f4b942;
@@ -896,21 +967,10 @@
             margin-bottom: 18px;
             color: #caf0c5;
         }
-        .footer-col p {
-            margin-bottom: 8px;
-        }
-        .footer-col a {
-            color: #e2f0dc;
-            text-decoration: none;
-        }
-        .footer-col a:hover {
-            text-decoration: underline;
-        }
         .social i {
             font-size: 1.5rem;
             margin-right: 16px;
             cursor: pointer;
-            transition: 0.2s;
         }
         .copyright {
             text-align: center;
@@ -925,22 +985,36 @@
                 font-size: 2rem;
             }
             nav {
-                gap: 18px;
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            .dropdown-content {
-                left: 0;
-                transform: translateX(0);
-                min-width: 220px;
+            .search-box {
+                width: 170px;
+            }
+            .search-box input {
+                width: 120px;
+            }
+            .opcao-item {
+                flex-wrap: wrap;
+            }
+            .btn-comprar-opcao {
+                margin-left: auto;
+            }
+            .pix-fixo {
+                bottom: 80px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
             }
             .whatsapp-fixo {
                 bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
             }
-            .modal-content {
-                margin: 10% auto;
-                width: 95%;
+            .whatsapp-fixo i {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -948,7 +1022,8 @@
 <body>
 
 <div class="top-bar">
-    <span><i class="fas fa-truck-fast"></i> Entrega para todo o Brasil</span>
+    <div class="left">Agromoc | Loja</div>
+    <div class="right"></div>
 </div>
 
 <header>
@@ -957,47 +1032,41 @@
         <p>Agro inteligente | Tradição e inovação</p>
     </div>
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Buscar produtos...">
+        <input type="text" id="searchInput" placeholder="Buscar...">
         <button id="searchBtn"><i class="fas fa-search"></i></button>
     </div>
 </header>
 
 <nav>
-    <a href="#" id="homeLink"><i class="fas fa-home"></i> Início</a>
-    
-    <div class="dropdown" id="produtosDropdown">
-        <a id="produtosLink" style="cursor: pointer;"><i class="fas fa-boxes"></i> Produtos <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 6px;"></i></a>
-        <div class="dropdown-content" id="categoriasMenu">
-            <a href="#" data-categoria="todos"><i class="fas fa-star"></i> Todos os produtos</a>
-            <a href="#" data-categoria="racao"><i class="fas fa-paw"></i> Ração & Nutrição</a>
-            <a href="#" data-categoria="equipamentos"><i class="fas fa-hard-hat"></i> Equipamentos & Botas</a>
-            <a href="#" data-categoria="defensivos"><i class="fas fa-leaf"></i> Defensivos Agrícolas</a>
-            <a href="#" data-categoria="forragens"><i class="fas fa-tree"></i> Forragens & Feno</a>
-            <a href="#" data-categoria="veterinaria"><i class="fas fa-syringe"></i> Medicamentos Veterinários</a>
-        </div>
-    </div>
-    
-    <a href="https://wa.me/5538999555854?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20produtos%20Agromoc." target="_blank">
-        <i class="fab fa-whatsapp"></i> Contato
-    </a>
-    
+    <a href="#" id="homeLink">Início</a>
+    <a href="#" id="produtosMenuLink">Produtos</a>
+    <a href="#" id="contatoLink">Contato</a>
+    <a href="#" id="notifyLink" class="user-link"><i class="fas fa-bell"></i> Notificações</a>
     <div class="cart-icon" id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
     </div>
 </nav>
 
+<div class="pix-fixo" id="pixFixoBtn">
+    <i class="fab fa-pix"></i>
+    <span>Transferir PIX</span>
+</div>
+
+<a href="https://wa.me/5538999555854?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20produtos%20Agromoc." target="_blank" class="whatsapp-fixo">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 <div class="hero">
     <div class="hero-content">
-        <h2>Campo forte, colheita farta</h2>
-        <p>Qualidade premium para o agro que movimenta o Brasil</p>
+        <h2>Ração de qualidade e Moda Country para quem vive vaquejada de verdade </h2>
+        <p>Qualidade premium para o agro que movimenta</p>
         <button class="btn-hero" onclick="document.getElementById('produtosSection').scrollIntoView({behavior:'smooth'})">
-            Explorar produtos <i class="fas fa-arrow-right"></i>
+            Explorar produtos →
         </button>
     </div>
 </div>
 
-<!-- OFERTAS NO TOPO -->
 <div class="container" id="ofertasSection">
     <div class="ofertas-section">
         <div class="ofertas-header">
@@ -1008,7 +1077,6 @@
     </div>
 </div>
 
-<!-- PRODUTOS -->
 <div class="container" id="produtosSection">
     <h2 class="section-title">Nossos Produtos</h2>
     <div class="subhead" id="categoriaAtivaTexto">Seleção especial com os melhores insumos</div>
@@ -1024,18 +1092,18 @@
     <div class="features">
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
-            <h4>Entrega Rápida</h4>
-            <p>Frete grátis para Sul e Sudeste em compras acima de R$ 300</p>
+            <h4>Fazemos Entregas </h4>
+            <p>Entregamos o seu produto com eficiência e a prazo</p>
         </div>
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-seedling"></i></div>
             <h4>Produtos Certificados</h4>
-            <p>Origem fiscal e garantia de qualidade agropecuária</p>
+            <p>Origem fiscal e garantia de qualidade</p>
         </div>
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h4>Suporte Técnico</h4>
-            <p>Engenheiros agrônomos para orientação personalizada</p>
+            <p>Equipe ideal te orientar em suas escolhas </p>
         </div>
     </div>
 </div>
@@ -1043,7 +1111,7 @@
 <div class="container">
     <div class="newsletter">
         <h3><i class="fas fa-envelope-open-text"></i> Receba ofertas exclusivas</h3>
-        <p>Fique por dentro de lançamentos e descontos especiais para o campo.</p>
+        <p>Fique por dentro de lançamentos e descontos especiais.</p>
         <div class="news-group">
             <input type="email" id="emailNews" placeholder="Seu melhor e-mail">
             <button id="btnNews">Inscrever-se</button>
@@ -1055,7 +1123,7 @@
     <div class="footer-grid">
         <div class="footer-col">
             <h4><i class="fas fa-store"></i> Agromoc</h4>
-            <p>Soluções completas para o agronegócio moderno.<br> Compromisso com a terra e produtividade.</p>
+            <p>Soluções completas para o agronegócio moderno.</p>
             <p><i class="fas fa-map-marker-alt"></i> Rua Francisco Gaetani, 146 - B/Maj. Prates, Montes Claros - MG, 39403-012</p>
             <p><i class="fas fa-phone-alt"></i> (38) 99955-5854</p>
             <p><i class="fas fa-envelope"></i> agromoc2022@gmail.com</p>
@@ -1076,120 +1144,313 @@
         </div>
     </div>
     <div class="copyright">
-        <p>© 2026 Agromoc - Tecnologia e tradição que movem o campo. Todos os direitos reservados.</p>
+        <p>© 2026 Agromoc - Tecnologia e tradição. Todos os direitos reservados.</p>
     </div>
 </footer>
 
-<a href="https://wa.me/5538999555854?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20produtos%20Agromoc." target="_blank" class="whatsapp-fixo">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
 <div id="produtoModal" class="modal">
     <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-box-open"></i> <span id="modalProdutoNome">Produto</span></h3>
-            <span class="close-modal">&times;</span>
-        </div>
+        <div class="modal-header"><h3><i class="fas fa-box-open"></i> <span id="modalProdutoNome">Produto</span></h3><span class="close-modal">&times;</span></div>
         <div class="modal-body">
-            <img id="modalProdutoImg" class="modal-img" src="" alt="">
+            <img id="modalProdutoImg" class="modal-img-principal" src="" alt="">
             <p id="modalProdutoDesc"></p>
             <div id="modalOpcoes"></div>
-            <button class="btn-comprar-modal" id="btnComprarModal">
-                <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
-            </button>
+        </div>
+    </div>
+</div>
+
+<div id="checkoutModal" class="checkout-modal">
+    <div class="checkout-content">
+        <div class="checkout-header">
+            <h3><i class="fas fa-credit-card"></i> Finalizar Pedido</h3>
+        </div>
+        <div class="checkout-body">
+            <div class="resumo-pedido" id="resumoPedido">
+                <h4>Resumo do Pedido</h4>
+                <div id="resumoItens"></div>
+                <div class="cart-total" style="margin-top: 10px;">
+                    <span>Total:</span>
+                    <span id="resumoTotal">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Nome completo</label>
+                <input type="text" id="clienteNome" placeholder="Digite seu nome completo">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-phone"></i> Telefone</label>
+                <input type="tel" id="clienteTelefone" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Endereço completo para entrega (Rua, Número, Bairro, Cidade)</label>
+                <textarea id="clienteEndereco" rows="2" placeholder="Ex: Rua das Flores, 123, Centro, Montes Claros - MG"></textarea>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 5px;">Digite o endereço e o mapa será atualizado automaticamente</p>
+            </div>
+            
+            <div class="map-container">
+                <div id="map" style="height: 250px; width: 100%; border-radius: 16px;"></div>
+                <p style="font-size: 0.7rem; text-align: center; margin-top: 5px;">O mapa mostra a localização automaticamente pelo endereço digitado</p>
+            </div>
+            
+            <div class="pix-area" id="pixArea" style="display: none;">
+                <h4><i class="fab fa-pix"></i> Pagamento via PIX</h4>
+                <div id="qrcode"></div>
+                <div class="pix-codigo" id="pixCodigo"></div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Escaneie o QR Code ou copie o código acima para pagar</p>
+                <p style="font-size: 0.8rem; color: #2e7d32; margin-top: 5px;">✅ Após o pagamento, o entregador verá sua localização no mapa e fará a entrega!</p>
+            </div>
+            
+            <button class="btn-finalizar-pedido" id="btnGerarPix">Gerar PIX para pagamento</button>
+            <button class="btn-fechar-checkout" id="btnFecharCheckout">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE NOTIFICAÇÕES (Cadastro simplificado) -->
+<div id="notifyModal" class="notify-modal">
+    <div class="notify-content">
+        <div class="notify-header">
+            <h3><i class="fas fa-bell"></i> Receba Notificações</h3>
+        </div>
+        <div class="notify-body">
+            <p>Cadastre seu e-mail para receber ofertas exclusivas, novidades e promoções da Agromoc!</p>
+            <div class="form-group">
+                <input type="email" id="notifyEmail" placeholder="Seu melhor e-mail" style="width: 100%;">
+            </div>
+            <div class="form-group">
+                <input type="text" id="notifyNome" placeholder="Seu nome (opcional)" style="width: 100%;">
+            </div>
+            <button class="btn-notify" id="btnCadastrarNotificacao">Cadastrar e Receber Notificações</button>
+            <button class="btn-fechar-checkout" id="btnFecharNotify" style="margin-top: 10px;">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="pixModal" class="auth-modal" style="display: none;">
+    <div class="auth-content" style="max-width: 400px;">
+        <div class="auth-header">
+            <h3><i class="fab fa-pix"></i> Transferência PIX</h3>
+        </div>
+        <div class="auth-body" style="text-align: center;">
+            <div id="pixModalQrcode" style="display: flex; justify-content: center; margin: 15px 0;"></div>
+            <div id="pixModalCodigo" class="pix-codigo"></div>
+            <p style="margin-top: 15px;">Escaneie o QR Code ou copie o código para transferir via PIX</p>
+            <button class="btn-fechar-checkout" id="btnFecharPixModal">Fechar</button>
         </div>
     </div>
 </div>
 
 <div class="overlay" id="overlay"></div>
 <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-        <h3><i class="fas fa-shopping-cart"></i> Meu Carrinho</h3>
-        <span class="close-cart" id="closeCart">&times;</span>
-    </div>
-    <div class="cart-items" id="cartItems">
-        <div class="cart-empty">🛒 Seu carrinho está vazio</div>
-    </div>
+    <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Meu Carrinho</h3><span class="close-cart" id="closeCart">&times;</span></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">🛒 Seu carrinho está vazio</div></div>
     <div class="cart-footer">
-        <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">R$ 0,00</span>
-        </div>
-        <button class="btn-finalizar" id="finalizarCompra">
-            <i class="fab fa-whatsapp"></i> Finalizar Compra
-        </button>
+        <div class="cart-total"><span>Total:</span><span id="cartTotal">R$ 0,00</span></div>
+        <button class="btn-finalizar-cart" id="btnFinalizarCarrinho"><i class="fas fa-credit-card"></i> Finalizar Compra</button>
     </div>
 </div>
 
 <script>
-    // ---------- PRODUTOS ORIGINAIS (sem ferramentas) com imagens reais ----------
+    // CHAVE PIX DA LOJA
+    const CHAVE_PIX_LOJA = "agromoc2022@gmail.com";
+    const NOME_RECEBEDOR = "AGROMOC PRODUTOS RURAIS";
+    const CIDADE = "MONTES CLAROS";
+    
+    let map = null;
+    let marker = null;
+    let geocoder = null;
+    let selectedLat = null;
+    let selectedLng = null;
+    
+    function initMap() {
+        const defaultLocation = { lat: -16.728, lng: -43.863 };
+        geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: defaultLocation,
+            zoom: 13,
+            styles: [{ featureType: 'poi', stylers: [{ visibility: 'off' }] }]
+        });
+        marker = new google.maps.Marker({ position: defaultLocation, map: map, draggable: true, animation: google.maps.Animation.DROP });
+        
+        marker.addListener('dragend', function(event) {
+            const lat = event.latLng.lat();
+            const lng = event.latLng.lng();
+            getAddressFromLatLng(lat, lng);
+        });
+        
+        map.addListener('click', function(event) {
+            const lat = event.latLng.lat();
+            const lng = event.latLng.lng();
+            marker.setPosition({ lat: lat, lng: lng });
+            getAddressFromLatLng(lat, lng);
+        });
+        
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                map.setCenter(userLocation);
+                marker.setPosition(userLocation);
+                getAddressFromLatLng(userLocation.lat, userLocation.lng);
+            });
+        }
+    }
+    
+    function geocodeAddress(enderecoCompleto) {
+        if(!geocoder || !enderecoCompleto.trim()) return;
+        geocoder.geocode({ address: enderecoCompleto + ", Brasil" }, function(results, status) {
+            if(status === 'OK' && results[0]) {
+                const location = results[0].geometry.location;
+                map.setCenter(location);
+                marker.setPosition(location);
+                selectedLat = location.lat();
+                selectedLng = location.lng();
+            }
+        });
+    }
+    
+    function getAddressFromLatLng(lat, lng) {
+        selectedLat = lat;
+        selectedLng = lng;
+        geocoder.geocode({ location: { lat: lat, lng: lng } }, function(results, status) {
+            if(status === 'OK' && results[0]) {
+                document.getElementById('clienteEndereco').value = results[0].formatted_address;
+            }
+        });
+    }
+    
+    function gerarPayloadPIX(valor) {
+        return `00020126360014BR.GOV.BCB.PIX0111${CHAVE_PIX_LOJA}5204000053039865404${valor.toFixed(2)}5802BR5915${NOME_RECEBEDOR}6008${CIDADE}62070503***6304`;
+    }
+    
+    function abrirPixFixo() {
+        const valor = prompt("💳 Transferência PIX\n\nDigite o valor que deseja transferir para a Agromoc:", "100,00");
+        if(valor) {
+            const valorNum = parseFloat(valor.replace(',', '.'));
+            if(!isNaN(valorNum) && valorNum > 0) {
+                const payload = gerarPayloadPIX(valorNum);
+                document.getElementById('pixModalQrcode').innerHTML = '';
+                new QRCode(document.getElementById('pixModalQrcode'), { text: payload, width: 200, height: 200 });
+                document.getElementById('pixModalCodigo').innerHTML = `<strong>Código PIX:</strong><br>${payload}`;
+                document.getElementById('pixModal').style.display = 'block';
+            } else { alert('Valor inválido!'); }
+        }
+    }
+    
+    // PRODUTOS
     const produtosData = {
         todos: [
             { 
-                nome: "Ração Super Premium", preco: 129.90, precoStr: "R$ 129,90", 
-                desc: "Alta digestibilidade, proteína nobre para máxima performance.", 
-                img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", 
-                badge: "Mais vendido", categoria: "racao", 
-                opcoes: [
-                    { nome: "Pacote 5kg", preco: 129.90, precoStr: "R$ 129,90", desc: "Ideal para pequenos animais" },
-                    { nome: "Pacote 10kg", preco: 239.90, precoStr: "R$ 239,90", desc: "Economize 8% - Mais vendido" }
-                ] 
-            },
-            { 
-                nome: "Botina Agro Forte", preco: 259.90, precoStr: "R$ 259,90", 
-                desc: "Couro hidrorrepelente, solado antiderrapante e biqueira de aço.", 
+                nome: "Botinas Profissionais", 
+                marca: "Agroforte / Couroforte / Montana / InovaBota / PlusBota",
+                preco: 199.90, 
+                precoStr: "A partir de R$ 199,90", 
+                desc: "Botinas de segurança para o campo em couro legítimo. Solado antiderrapante, biqueira de aço, resistentes à água e produtos químicos. Ideais para trabalho rural e pecuária.", 
                 img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=600", 
-                badge: "Conforto", categoria: "equipamentos", 
-                opcoes: [
-                    { nome: "Tamanho 38", preco: 259.90, precoStr: "R$ 259,90", desc: "Couro marrom - Disponível" },
-                    { nome: "Tamanho 40", preco: 259.90, precoStr: "R$ 259,90", desc: "Couro marrom - Mais vendido" },
-                    { nome: "Tamanho 42", preco: 259.90, precoStr: "R$ 259,90", desc: "Couro marrom - Últimas unidades" }
-                ] 
+                badge: "Vários modelos", 
+                categoria: "botinas",
+                opcoes: (() => {
+                    const opcoes = [];
+                    const marcas = ["Agroforte", "Couroforte", "Montana", "InovaBota", "PlusBota"];
+                    const tamanhos = [36, 37, 38, 39, 40, 41, 42, 43, 44];
+                    const cores = ["Marrom", "Preto", "Couro Natural"];
+                    const precosBase = { Agroforte: 199.90, Couroforte: 219.90, Montana: 229.90, InovaBota: 214.90, PlusBota: 224.90 };
+                    marcas.forEach(marca => {
+                        tamanhos.forEach(tam => {
+                            cores.forEach(cor => {
+                                opcoes.push({
+                                    nome: `${marca} - Tamanho ${tam} - ${cor}`,
+                                    preco: precosBase[marca],
+                                    precoStr: `R$ ${precosBase[marca].toFixed(2).replace('.', ',')}`,
+                                    desc: `Botina ${marca} em couro legítimo. Solado antiderrapante, biqueira de aço. Tamanho ${tam}, cor ${cor}. Ideal para trabalho rural.`,
+                                    img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=200"
+                                });
+                            });
+                        });
+                    });
+                    return opcoes;
+                })(),
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Todas as Botinas (Marcas, Tamanhos e Cores)", itens: [] }]
             },
             { 
-                nome: "Defensivo BioNativo", preco: 84.90, precoStr: "R$ 84,90", 
-                desc: "Controle biológico de pragas, 100% orgânico e sustentável.", 
-                img: "https://images.pexels.com/photos/6889388/plants-spraying-pesticide-farming-agriculture-6889388.jpg?auto=compress&cs=tinysrgb&w=600", 
-                badge: "Orgânico", categoria: "defensivos", 
+                nome: "Chapéus e Bonés", 
+                marca: "Palha Brasil / Couro Nobre / Vaquero / AgroStyle",
+                preco: 39.90, 
+                precoStr: "A partir de R$ 39,90", 
+                desc: "Proteção solar para o campo. Chapéus de palha natural, couro legítimo e bonés com proteção UV. Ideais para longas jornadas de trabalho ao sol.", 
+                img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Novidades", 
+                categoria: "chapeus",
                 opcoes: [
-                    { nome: "Frasco 500ml", preco: 84.90, precoStr: "R$ 84,90", desc: "Para pequenas áreas" },
-                    { nome: "Frasco 1L", preco: 149.90, precoStr: "R$ 149,90", desc: "Economize 12%" }
-                ] 
+                    { nome: "Chapéu Palha Tradicional - Palha Natural", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural, leve e respirável. Marca Palha Brasil.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Chapéu Palha Tradicional - Palha Escura", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural escura. Marca Palha Brasil.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Chapéu Couro Legítimo - Marrom", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo, resistente e durável. Marca Couro Nobre.", img: "https://images.pexels.com/photos/2712019/pexels-photo-2712019.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Chapéu Couro Legítimo - Preto", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo preto. Marca Couro Nobre.", img: "https://images.pexels.com/photos/2712019/pexels-photo-2712019.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Chapéu Vaquero - Bege", preco: 89.90, precoStr: "R$ 89,90", desc: "Chapéu estilo vaqueiro, abas largas. Marca Vaquero.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Chapéu Vaquero - Marrom", preco: 89.90, precoStr: "R$ 89,90", desc: "Chapéu estilo vaqueiro marrom. Marca Vaquero.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Boné Agro - Verde", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Boné Agro - Preto", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão preto com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Boné Agro - Azul", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão azul com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Chapéus e Bonés", itens: [] }]
             },
             { 
-                nome: "Feno Alfafa Premium", preco: 74.90, precoStr: "R$ 74,90", 
-                desc: "Rico em fibras, ideal para equinos e pequenos ruminantes.", 
-                img: "https://images.pexels.com/photos/5403118/hay-bales-on-field-5403118.jpg?auto=compress&cs=tinysrgb&w=600", 
-                badge: "Nutrição animal", categoria: "forragens", 
+                nome: "Ração para Cavalos", 
+                marca: "Equus Premium / HorsePower",
+                preco: 159.90, 
+                precoStr: "A partir de R$ 159,90", 
+                desc: "Nutrição completa para equinos. Ração premium com vitaminas, minerais e proteínas de alta qualidade. Melhora a performance, saúde e pelagem dos cavalos.", 
+                img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Premium", 
+                categoria: "racao",
                 opcoes: [
-                    { nome: "Fardo 12kg", preco: 74.90, precoStr: "R$ 74,90", desc: "Alfafa pura" },
-                    { nome: "Fardo 25kg", preco: 139.90, precoStr: "R$ 139,90", desc: "Melhor custo-benefício" }
-                ] 
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 5kg", preco: 189.90, precoStr: "R$ 189,90", desc: "Ração para alta performance. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 10kg", preco: 349.90, precoStr: "R$ 349,90", desc: "Ração para alta performance. Economize 7%. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 20kg", preco: 649.90, precoStr: "R$ 649,90", desc: "Ração para alta performance. Economize 14%. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 5kg", preco: 169.90, precoStr: "R$ 169,90", desc: "Ração para reprodução. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 10kg", preco: 314.90, precoStr: "R$ 314,90", desc: "Ração para reprodução. Economize 7%. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 20kg", preco: 579.90, precoStr: "R$ 579,90", desc: "Ração para reprodução. Economize 14%. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Rações para Cavalos", itens: [] }]
             },
             { 
-                nome: "Vermífugo Equino", preco: 45.90, precoStr: "R$ 45,90", 
-                desc: "Proteção completa contra parasitas internos e externos.", 
-                img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=600", 
-                badge: "Veterinário", categoria: "veterinaria", 
+                nome: "Ração para Cachorros", 
+                marca: "DogChef / PetPremium",
+                preco: 84.90, 
+                precoStr: "A partir de R$ 84,90", 
+                desc: "Alimentação completa para cães. Ração premium com proteínas selecionadas, vitaminas e minerais para todas as raças e portes. Saúde e energia para seu melhor amigo.", 
+                img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Cães", 
+                categoria: "racao",
                 opcoes: [
-                    { nome: "Unidade", preco: 45.90, precoStr: "R$ 45,90", desc: "Tratamento único" },
-                    { nome: "Kit 3 unidades", preco: 129.90, precoStr: "R$ 129,90", desc: "Economize 6%" }
-                ] 
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 5kg", preco: 89.90, precoStr: "R$ 89,90", desc: "Para cães adultos porte médio/grande. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 10kg", preco: 166.90, precoStr: "R$ 166,90", desc: "Para cães adultos. Economize 7%. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 20kg", preco: 306.90, precoStr: "R$ 306,90", desc: "Para cães adultos. Economize 14%. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 5kg", preco: 99.90, precoStr: "R$ 99,90", desc: "Nutrição completa para crescimento. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 10kg", preco: 184.90, precoStr: "R$ 184,90", desc: "Para filhotes. Economize 7%. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 20kg", preco: 339.90, precoStr: "R$ 339,90", desc: "Para filhotes. Economize 14%. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Rações para Cachorros", itens: [] }]
             }
         ],
-        racao: [], equipamentos: [], defensivos: [], forragens: [], veterinaria: []
+        botinas: [], chapeus: [], racao: []
     };
     
-    // Organizar por categoria
-    produtosData.todos.forEach(prod => { 
-        if(produtosData[prod.categoria]) produtosData[prod.categoria].push(prod); 
+    produtosData.todos.forEach(prod => {
+        if(prod.opcoesAgrupadas && prod.gruposOpcoes) {
+            prod.gruposOpcoes[0].itens = prod.opcoes;
+        }
+        if(produtosData[prod.categoria]) produtosData[prod.categoria].push(prod);
     });
     
-    // ---------- OFERTAS (com imagens reais) ----------
     const ofertasList = [
-        { nome: "Ração Premium + Brinde", precoAntigo: "R$ 149,90", precoOfertaNum: 99.90, precoOferta: "R$ 99,90", parcela: "ou 3x R$ 33,30", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", badge: "-33%" },
-        { nome: "Botina Agro Biqueira", precoAntigo: "R$ 289,90", precoOfertaNum: 199.90, precoOferta: "R$ 199,90", parcela: "ou 4x R$ 49,97", img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=600", badge: "-31%" },
-        { nome: "Combo Defensivo + Inseticida", precoAntigo: "R$ 179,90", precoOfertaNum: 129.90, precoOferta: "R$ 129,90", parcela: "ou 3x R$ 43,30", img: "https://images.pexels.com/photos/6889388/plants-spraying-pesticide-farming-agriculture-6889388.jpg?auto=compress&cs=tinysrgb&w=600", badge: "SUPER OFF" }
+        { nome: "Botina Agroforte - Promoção", precoAntigo: "R$ 249,90", precoOfertaNum: 179.90, precoOferta: "R$ 179,90", parcela: "ou 3x R$ 59,97", img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=600", badge: "-28%" },
+        { nome: "Chapéu Palha + Boné", precoAntigo: "R$ 89,90", precoOfertaNum: 69.90, precoOferta: "R$ 69,90", parcela: "ou 2x R$ 34,95", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=600", badge: "-22%" },
+        { nome: "Ração Cavalo Atleta 20kg", precoAntigo: "R$ 349,90", precoOfertaNum: 299.90, precoOferta: "R$ 299,90", parcela: "ou 4x R$ 74,97", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", badge: "-14%" }
     ];
     
     function renderOfertas() {
@@ -1197,262 +1458,226 @@
         if(!grid) return;
         let html = '';
         ofertasList.forEach(off => {
-            html += `
-                <div class="card-oferta">
-                    <div class="oferta-badge">${off.badge}</div>
-                    <div class="img-oferta"><img src="${off.img}" alt="${off.nome}"></div>
-                    <div class="info-oferta">
-                        <h3>${off.nome}</h3>
-                        <div class="preco-original">${off.precoAntigo}</div>
-                        <div class="preco-oferta">${off.precoOferta}</div>
-                        <div class="parcela">${off.parcela} sem juros</div>
-                        <button class="btn-oferta" data-nome="${off.nome}" data-preco="${off.precoOfertaNum}" data-img="${off.img}">Aproveitar Oferta <i class="fas fa-fire"></i></button>
-                    </div>
-                </div>
-            `;
+            html += `<div class="card-oferta"><div class="oferta-badge">${off.badge}</div><div class="img-oferta"><img src="${off.img}"></div><div class="info-oferta"><h3>${off.nome}</h3><div class="preco-original">${off.precoAntigo}</div><div class="preco-oferta">${off.precoOferta}</div><div class="parcela">${off.parcela} sem juros</div><button class="btn-oferta" data-nome="${off.nome}" data-preco="${off.precoOfertaNum}" data-img="${off.img}">Aproveitar Oferta <i class="fas fa-fire"></i></button></div></div>`;
         });
         grid.innerHTML = html;
         document.querySelectorAll(".btn-oferta").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const nome = btn.getAttribute("data-nome");
-                const preco = parseFloat(btn.getAttribute("data-preco"));
-                const img = btn.getAttribute("data-img");
-                adicionarAoCarrinho({ nome, preco, precoStr: `R$ ${preco.toFixed(2).replace('.', ',')}`, img, desc: "Oferta especial" }, null);
+            btn.addEventListener("click", () => {
+                const nome = btn.dataset.nome, preco = parseFloat(btn.dataset.preco), img = btn.dataset.img;
+                adicionarAoCarrinho({ nome, preco, precoStr: `R$ ${preco.toFixed(2).replace('.',',')}`, img, desc: "Oferta" }, null);
             });
         });
     }
     
-    // ---------- CARRINHO ----------
     let carrinho = [];
     function salvarCarrinho() { localStorage.setItem('carrinhoAgromoc', JSON.stringify(carrinho)); }
     function carregarCarrinho() { const saved = localStorage.getItem('carrinhoAgromoc'); if(saved) carrinho = JSON.parse(saved); atualizarCarrinhoUI(); }
     
-    function adicionarAoCarrinho(produto, opcaoSelecionada = null) {
-        const itemNome = opcaoSelecionada ? `${produto.nome} - ${opcaoSelecionada.nome}` : produto.nome;
-        const itemPreco = opcaoSelecionada ? opcaoSelecionada.preco : produto.preco;
-        const itemImg = produto.img;
-        const existente = carrinho.find(item => item.nome === itemNome);
+    function adicionarAoCarrinho(produto, opcao) {
+        const nome = opcao ? `${produto.nome} - ${opcao.nome}` : produto.nome;
+        const preco = opcao ? opcao.preco : produto.preco;
+        const img = opcao ? opcao.img : produto.img;
+        const existente = carrinho.find(i => i.nome === nome);
         if(existente) existente.quantidade++;
-        else carrinho.push({ nome: itemNome, preco: itemPreco, precoStr: `R$ ${itemPreco.toFixed(2).replace('.', ',')}`, img: itemImg, quantidade: 1 });
-        salvarCarrinho();
-        atualizarCarrinhoUI();
+        else carrinho.push({ nome, preco, precoStr: `R$ ${preco.toFixed(2).replace('.',',')}`, img, quantidade: 1 });
+        salvarCarrinho(); atualizarCarrinhoUI();
         document.getElementById('cartSidebar').classList.add('open');
         document.getElementById('overlay').classList.add('show');
     }
     
-    function removerDoCarrinho(index) { carrinho.splice(index,1); salvarCarrinho(); atualizarCarrinhoUI(); }
-    function alterarQuantidade(index, delta) {
-        if(carrinho[index]) {
-            const nova = carrinho[index].quantidade + delta;
-            if(nova <= 0) removerDoCarrinho(index);
-            else { carrinho[index].quantidade = nova; salvarCarrinho(); atualizarCarrinhoUI(); }
+    function removerDoCarrinho(idx) { carrinho.splice(idx,1); salvarCarrinho(); atualizarCarrinhoUI(); }
+    function alterarQuantidade(idx, delta) {
+        if(carrinho[idx]) {
+            const nova = carrinho[idx].quantidade + delta;
+            if(nova <= 0) removerDoCarrinho(idx);
+            else { carrinho[idx].quantidade = nova; salvarCarrinho(); atualizarCarrinhoUI(); }
         }
     }
     
     function atualizarCarrinhoUI() {
-        const cartItemsDiv = document.getElementById('cartItems');
-        const cartCountSpan = document.getElementById('cartCount');
-        const cartTotalSpan = document.getElementById('cartTotal');
+        const itemsDiv = document.getElementById('cartItems');
+        const countSpan = document.getElementById('cartCount');
+        const totalSpan = document.getElementById('cartTotal');
         let totalItens = 0, totalPreco = 0;
         if(carrinho.length === 0) {
-            cartItemsDiv.innerHTML = '<div class="cart-empty">🛒 Seu carrinho está vazio</div>';
-            cartCountSpan.textContent = '0';
-            cartTotalSpan.textContent = 'R$ 0,00';
+            itemsDiv.innerHTML = '<div class="cart-empty">🛒 Seu carrinho está vazio</div>';
+            countSpan.textContent = '0'; totalSpan.textContent = 'R$ 0,00';
             return;
         }
         let html = '';
         carrinho.forEach((item, idx) => {
             totalItens += item.quantidade;
             totalPreco += item.preco * item.quantidade;
-            html += `
-                <div class="cart-item">
-                    <img src="${item.img}" class="cart-item-img">
-                    <div class="cart-item-info">
-                        <h4>${item.nome}</h4>
-                        <div class="cart-item-price">${item.precoStr}</div>
-                        <div class="cart-item-quantity">
-                            <button onclick="alterarQuantidade(${idx}, -1)">-</button>
-                            <span>${item.quantidade}</span>
-                            <button onclick="alterarQuantidade(${idx}, 1)">+</button>
-                        </div>
-                        <div class="remove-item" onclick="removerDoCarrinho(${idx})">🗑️ Remover</div>
-                    </div>
-                </div>
-            `;
+            html += `<div class="cart-item"><img src="${item.img}" class="cart-item-img"><div class="cart-item-info"><h4>${item.nome}</h4><div class="cart-item-price">${item.precoStr}</div><div class="cart-item-quantity"><button onclick="alterarQuantidade(${idx}, -1)">-</button><span>${item.quantidade}</span><button onclick="alterarQuantidade(${idx}, 1)">+</button></div><div class="remove-item" onclick="removerDoCarrinho(${idx})">🗑️ Remover</div></div></div>`;
         });
-        cartItemsDiv.innerHTML = html;
-        cartCountSpan.textContent = totalItens;
-        cartTotalSpan.textContent = `R$ ${totalPreco.toFixed(2).replace('.', ',')}`;
+        itemsDiv.innerHTML = html;
+        countSpan.textContent = totalItens;
+        totalSpan.textContent = `R$ ${totalPreco.toFixed(2).replace('.',',')}`;
     }
     
-    function finalizarCompra() {
+    let pedidoTotal = 0;
+    function abrirCheckout() {
         if(carrinho.length === 0) { alert('Carrinho vazio!'); return; }
-        let msg = "🛒 *PEDIDO AGROMOC* 🛒\n\n";
-        let total = 0;
+        pedidoTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+        const resumoDiv = document.getElementById('resumoItens');
+        let resumoHtml = '';
         carrinho.forEach(item => {
-            msg += `📦 ${item.nome} x${item.quantidade} = R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
-            total += item.preco * item.quantidade;
+            resumoHtml += `<p>📦 ${item.nome} x${item.quantidade} = R$ ${(item.preco * item.quantidade).toFixed(2).replace('.',',')}</p>`;
         });
-        msg += `\n💰 TOTAL: R$ ${total.toFixed(2)}\n\n✅ Confirmar pedido?`;
-        window.open(`https://wa.me/5538999555854?text=${encodeURIComponent(msg)}`, "_blank");
-        carrinho = []; salvarCarrinho(); atualizarCarrinhoUI();
-        document.getElementById('cartSidebar').classList.remove('open');
-        document.getElementById('overlay').classList.remove('show');
+        resumoDiv.innerHTML = resumoHtml;
+        document.getElementById('resumoTotal').innerText = `R$ ${pedidoTotal.toFixed(2).replace('.',',')}`;
+        document.getElementById('checkoutModal').style.display = 'block';
+        document.getElementById('pixArea').style.display = 'none';
+        if(map) { setTimeout(() => { google.maps.event.trigger(map, 'resize'); }, 100); }
     }
     
-    // ---------- SWIPER E RENDER ----------
-    let swiperInstance = null;
-    let produtoSelecionado = null;
-    let opcaoSelecionadaGlobal = null;
-    let categoriaAtual = "todos";
-    let termoBusca = "";
+    function gerarPIX() {
+        const nome = document.getElementById('clienteNome').value.trim();
+        const telefone = document.getElementById('clienteTelefone').value.trim();
+        const endereco = document.getElementById('clienteEndereco').value.trim();
+        if (!nome || !telefone || !endereco) { alert('Preencha todos os campos!'); return; }
+        if (!selectedLat || !selectedLng) { 
+            geocodeAddress(endereco);
+            if(!selectedLat) { alert('Digite um endereço válido ou clique no mapa para marcar sua localização!'); return; }
+        }
+        const pedido = { cliente: nome, telefone: telefone, endereco: endereco, latitude: selectedLat, longitude: selectedLng, itens: carrinho, total: pedidoTotal, data: new Date().toLocaleString(), status: 'Aguardando pagamento' };
+        localStorage.setItem('ultimoPedido', JSON.stringify(pedido));
+        const payload = gerarPayloadPIX(pedidoTotal);
+        document.getElementById('qrcode').innerHTML = '';
+        new QRCode(document.getElementById('qrcode'), { text: payload, width: 200, height: 200 });
+        document.getElementById('pixCodigo').innerHTML = `<strong>Código PIX:</strong><br>${payload}`;
+        document.getElementById('pixArea').style.display = 'block';
+        const entregaUrl = `https://www.google.com/maps/dir/?api=1&destination=${selectedLat},${selectedLng}`;
+        
+        alert(`🎉 PARABÉNS PELA COMPRA!!! 🎉\n\nVocê tomou uma ótima decisão!\n\n✅ Pedido registrado, ${nome}!\n📦 Seu pedido será entregue em:\n${endereco}\n🗺️ Rota para o entregador: ${entregaUrl}\n\n💰 Total: R$ ${pedidoTotal.toFixed(2).replace('.', ',')}\n\nApós o pagamento via PIX, o entregador será notificado e fará a entrega!\n\nObrigado por comprar na Agromoc! 🌿`);
+        
+        carrinho = [];
+        salvarCarrinho();
+        atualizarCarrinhoUI();
+        document.getElementById('checkoutModal').style.display = 'none';
+    }
     
+    // NOTIFICAÇÕES (Cadastro simplificado)
+    function abrirNotifyModal() {
+        document.getElementById('notifyModal').style.display = 'block';
+    }
+    
+    function cadastrarNotificacao() {
+        const email = document.getElementById('notifyEmail').value.trim();
+        const nome = document.getElementById('notifyNome').value.trim();
+        
+        if(!email || !email.includes('@')) {
+            alert('Por favor, insira um e-mail válido para receber as notificações!');
+            return;
+        }
+        
+        // Salvar no localStorage
+        const notificados = JSON.parse(localStorage.getItem('agromoc_notificacoes') || '[]');
+        if(!notificados.find(n => n.email === email)) {
+            notificados.push({ email, nome, data: new Date().toLocaleString() });
+            localStorage.setItem('agromoc_notificacoes', JSON.stringify(notificados));
+        }
+        
+        alert(`✅ ${nome ? nome : 'Usuário'}! Seu e-mail ${email} foi cadastrado com sucesso!\n\nVocê receberá nossas ofertas, novidades e promoções exclusivas!`);
+        
+        document.getElementById('notifyEmail').value = '';
+        document.getElementById('notifyNome').value = '';
+        document.getElementById('notifyModal').style.display = 'none';
+    }
+    
+    let swiper = null;
+    let categoriaAtual = "todos", termoBusca = "";
     function getProdutosFiltrados() {
-        let lista = (categoriaAtual === "todos") ? produtosData.todos : (produtosData[categoriaAtual] || []);
-        if(termoBusca.trim()) lista = lista.filter(p => p.nome.toLowerCase().includes(termoBusca.toLowerCase()));
+        let lista = categoriaAtual === "todos" ? produtosData.todos : (produtosData[categoriaAtual] || []);
+        if(termoBusca.trim()) { lista = lista.filter(p => p.nome.toLowerCase().startsWith(termoBusca.toLowerCase())); }
         return lista;
     }
     
     function renderProducts() {
-        const produtosArray = getProdutosFiltrados();
+        const lista = getProdutosFiltrados();
         const wrapper = document.getElementById("produtosWrapper");
         if(!wrapper) return;
-        if(produtosArray.length === 0) {
-            wrapper.innerHTML = `<div class="swiper-slide" style="text-align:center; background:white; border-radius:28px; padding:40px;"><i class="fas fa-box-open" style="font-size:48px;"></i><p>Nenhum produto encontrado.</p></div>`;
-            if(swiperInstance) swiperInstance.update();
-            return;
-        }
+        if(lista.length === 0) { wrapper.innerHTML = `<div class="swiper-slide" style="text-align:center; padding:40px;">Nenhum produto encontrado.</div>`; if(swiper) swiper.update(); return; }
         let html = '';
-        produtosArray.forEach(prod => {
-            html += `
-                <div class="swiper-slide">
-                    <div class="produto">
-                        <div class="img-container">
-                            <img src="${prod.img}" alt="${prod.nome}">
-                            <div class="badge">${prod.badge || "Destaque"}</div>
-                        </div>
-                        <h3>${prod.nome}</h3>
-                        <p>${prod.desc}</p>
-                        <div class="price-tag">${prod.precoStr}</div>
-                        <button class="btn-comprar-produto" data-produto-nome="${prod.nome}"><i class="fas fa-cart-plus"></i> Comprar</button>
-                        <button class="btn-ver" data-produto-nome="${prod.nome}">Ver Opções <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            `;
+        lista.forEach(prod => {
+            html += `<div class="swiper-slide"><div class="produto"><div class="img-container"><img src="${prod.img}"><div class="badge">${prod.badge || "Destaque"}</div></div><h3>${prod.nome}</h3><div class="produto-marca"><i class="fas fa-tag"></i> ${prod.marca}</div><p>${prod.desc}</p><div class="price-tag">${prod.precoStr}</div><button class="btn-ver" data-nome="${prod.nome}">Ver Opções <i class="fas fa-chevron-right"></i></button></div></div>`;
         });
         wrapper.innerHTML = html;
-        if(swiperInstance) swiperInstance.destroy(true, true);
-        swiperInstance = new Swiper(".mySwiper", {
-            slidesPerView: 1, spaceBetween: 24, loop: produtosArray.length >= 2,
-            autoplay: produtosArray.length > 1 ? { delay: 4000, disableOnInteraction: false } : false,
-            pagination: { el: ".swiper-pagination", clickable: true },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-            breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } }
-        });
-        
-        document.querySelectorAll(".btn-comprar-produto").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const nome = btn.getAttribute("data-produto-nome");
-                const produto = produtosData.todos.find(p => p.nome === nome);
-                if(produto) adicionarAoCarrinho(produto, null);
-            });
-        });
+        if(swiper) swiper.destroy(true,true);
+        swiper = new Swiper(".mySwiper", { slidesPerView:1, spaceBetween:24, loop:lista.length>=2, autoplay:lista.length>1?{delay:4000,disableOnInteraction:false}:false, pagination:{el:".swiper-pagination",clickable:true}, navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}, breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:3},1280:{slidesPerView:4}} });
         document.querySelectorAll(".btn-ver").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const nome = btn.getAttribute("data-produto-nome");
-                const produto = produtosData.todos.find(p => p.nome === nome);
-                if(produto) abrirModal(produto);
-            });
+            btn.addEventListener("click", () => { const prod = produtosData.todos.find(p => p.nome === btn.dataset.nome); if(prod) abrirModal(prod); });
         });
-        const categoriaTexto = document.getElementById("categoriaAtivaTexto");
-        const nomes = { todos: "Todos os produtos", racao: "🍖 Ração e Nutrição", equipamentos: "🥾 Equipamentos", defensivos: "🌿 Defensivos", forragens: "🌾 Forragens", veterinaria: "💊 Veterinária" };
-        categoriaTexto.innerHTML = termoBusca ? `Resultados para: "${termoBusca}"` : nomes[categoriaAtual] || "Produtos";
+        document.getElementById("categoriaAtivaTexto").innerHTML = termoBusca ? `Resultados para: "${termoBusca}"` : (categoriaAtual==="todos"?"Todos os produtos":categoriaAtual);
     }
     
-    function abrirModal(produto) {
-        produtoSelecionado = produto;
-        opcaoSelecionadaGlobal = null;
-        document.getElementById("modalProdutoNome").innerText = produto.nome;
-        document.getElementById("modalProdutoImg").src = produto.img;
-        document.getElementById("modalProdutoDesc").innerHTML = `<strong>${produto.desc}</strong><div class="modal-preco">${produto.precoStr}</div>`;
-        let opcoesHtml = '<h4 style="margin:20px 0 12px;"><i class="fas fa-tags"></i> Opções:</h4>';
-        if(produto.opcoes && produto.opcoes.length) {
-            produto.opcoes.forEach((op, idx) => {
-                opcoesHtml += `
-                    <div class="opcao-item" data-opcao-index="${idx}">
-                        <h4>${op.nome}</h4>
-                        <div class="opcao-desc">${op.desc}</div>
-                        <div class="opcao-preco">${op.precoStr}</div>
-                    </div>
-                `;
+    function abrirModal(prod) {
+        document.getElementById("modalProdutoNome").innerText = prod.nome;
+        document.getElementById("modalProdutoImg").src = prod.img;
+        document.getElementById("modalProdutoDesc").innerHTML = `<strong>${prod.desc}</strong><br><br><i class="fas fa-tag"></i> <strong>Marca:</strong> ${prod.marca}`;
+        let opcoesHtml = '';
+        if(prod.opcoesAgrupadas && prod.gruposOpcoes) {
+            prod.gruposOpcoes.forEach(grupo => {
+                opcoesHtml += `<div class="categoria-opcoes"><h4><i class="fas fa-tags"></i> ${grupo.titulo}</h4>`;
+                grupo.itens.forEach((op, idx) => {
+                    opcoesHtml += `<div class="opcao-item" data-opcao-nome="${op.nome}" data-opcao-preco="${op.preco}" data-opcao-preco-str="${op.precoStr}" data-opcao-desc="${op.desc}" data-opcao-img="${op.img}"><img src="${op.img}" class="opcao-img"><div class="opcao-info"><h4>${op.nome}</h4><div class="opcao-preco">${op.precoStr}</div><small>${op.desc}</small></div><button class="btn-comprar-opcao"><i class="fas fa-cart-plus"></i> Comprar</button></div>`;
+                });
+                opcoesHtml += `</div>`;
             });
-        } else { opcoesHtml += '<p>Versão padrão apenas.</p>'; }
+        } else if(prod.opcoes && prod.opcoes.length) {
+            prod.opcoes.forEach((op, idx) => {
+                opcoesHtml += `<div class="opcao-item" data-opcao-nome="${op.nome}" data-opcao-preco="${op.preco}" data-opcao-preco-str="${op.precoStr}" data-opcao-desc="${op.desc}" data-opcao-img="${op.img}"><img src="${op.img}" class="opcao-img"><div class="opcao-info"><h4>${op.nome}</h4><div class="opcao-preco">${op.precoStr}</div><small>${op.desc}</small></div><button class="btn-comprar-opcao"><i class="fas fa-cart-plus"></i> Comprar</button></div>`;
+            });
+        }
         document.getElementById("modalOpcoes").innerHTML = opcoesHtml;
-        document.querySelectorAll(".opcao-item").forEach(el => {
-            el.addEventListener("click", function() {
-                document.querySelectorAll(".opcao-item").forEach(i => i.style.background = "#f5fbf2");
-                this.style.background = "#e0f0da";
-                const idx = parseInt(this.getAttribute("data-opcao-index"));
-                opcaoSelecionadaGlobal = produto.opcoes[idx];
-                const precoElem = document.querySelector("#modalProdutoDesc .modal-preco");
-                if(precoElem && opcaoSelecionadaGlobal) precoElem.innerText = opcaoSelecionadaGlobal.precoStr;
+        document.querySelectorAll(".btn-comprar-opcao").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const itemDiv = btn.closest(".opcao-item");
+                const nome = itemDiv.dataset.opcaoNome;
+                const preco = parseFloat(itemDiv.dataset.opcaoPreco);
+                const precoStr = itemDiv.dataset.opcaoPrecoStr;
+                const desc = itemDiv.dataset.opcaoDesc;
+                const img = itemDiv.dataset.opcaoImg;
+                adicionarAoCarrinho({ nome: prod.nome, preco, precoStr, img, desc }, { nome, preco, precoStr, desc, img });
+                document.getElementById("produtoModal").style.display = "none";
             });
         });
         document.getElementById("produtoModal").style.display = "block";
     }
     
-    // ---------- EVENTOS ----------
-    document.getElementById("btnComprarModal").addEventListener("click", () => {
-        if(produtoSelecionado) adicionarAoCarrinho(produtoSelecionado, opcaoSelecionadaGlobal);
-        document.getElementById("produtoModal").style.display = "none";
-    });
+    // Eventos
     document.querySelector(".close-modal").onclick = () => document.getElementById("produtoModal").style.display = "none";
     window.onclick = (e) => { if(e.target == document.getElementById("produtoModal")) document.getElementById("produtoModal").style.display = "none"; };
     document.getElementById("cartIcon").onclick = () => { document.getElementById('cartSidebar').classList.add('open'); document.getElementById('overlay').classList.add('show'); };
     document.getElementById("closeCart").onclick = () => { document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); };
     document.getElementById("overlay").onclick = () => { document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); };
-    document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra);
+    document.getElementById("btnFinalizarCarrinho").onclick = abrirCheckout;
+    document.getElementById("btnGerarPix").onclick = gerarPIX;
+    document.getElementById("btnFecharCheckout").onclick = () => document.getElementById("checkoutModal").style.display = "none";
+    document.getElementById("pixFixoBtn").onclick = abrirPixFixo;
+    document.getElementById("btnFecharPixModal").onclick = () => document.getElementById("pixModal").style.display = "none";
+    document.getElementById("notifyLink").onclick = (e) => { e.preventDefault(); abrirNotifyModal(); };
+    document.getElementById("btnCadastrarNotificacao").onclick = cadastrarNotificacao;
+    document.getElementById("btnFecharNotify").onclick = () => document.getElementById("notifyModal").style.display = "none";
     
-    const dropdownDiv = document.getElementById("categoriasMenu");
-    const produtosNavLink = document.getElementById("produtosLink");
-    produtosNavLink.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); dropdownDiv.classList.toggle("show"); });
-    document.addEventListener("click", (e) => { if(!document.getElementById("produtosDropdown").contains(e.target)) dropdownDiv.classList.remove("show"); });
-    document.querySelectorAll("#categoriasMenu a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            categoriaAtual = link.getAttribute("data-categoria");
-            termoBusca = "";
-            document.getElementById("searchInput").value = "";
-            renderProducts();
-            dropdownDiv.classList.remove("show");
-            document.getElementById("produtosSection").scrollIntoView({ behavior: "smooth" });
-        });
-    });
+    document.getElementById("homeLink").onclick = (e) => { e.preventDefault(); categoriaAtual="todos"; termoBusca=""; document.getElementById("searchInput").value=""; renderProducts(); window.scrollTo({top:0,behavior:"smooth"}); };
+    document.getElementById("produtosMenuLink").onclick = (e) => { e.preventDefault(); document.getElementById("produtosSection").scrollIntoView({behavior:"smooth"}); };
+    document.getElementById("contatoLink").onclick = (e) => { e.preventDefault(); document.querySelector('footer').scrollIntoView({behavior:"smooth"}); };
+    document.getElementById("searchBtn").onclick = () => { termoBusca = document.getElementById("searchInput").value.trim(); categoriaAtual="todos"; renderProducts(); document.getElementById("produtosSection").scrollIntoView({behavior:"smooth"}); };
+    document.getElementById("searchInput").addEventListener("keypress", (e) => { if(e.key==="Enter") document.getElementById("searchBtn").click(); });
+    document.getElementById("btnNews").onclick = () => { const email = document.getElementById("emailNews").value.trim(); if(email && email.includes("@")) { alert(`✅ Inscrito: ${email}! Você receberá nossas ofertas.`); document.getElementById("emailNews").value = ""; } else alert("E-mail inválido"); };
     
-    document.getElementById("searchBtn").addEventListener("click", () => {
-        termoBusca = document.getElementById("searchInput").value.trim();
-        categoriaAtual = "todos";
-        renderProducts();
-        document.getElementById("produtosSection").scrollIntoView({ behavior: "smooth" });
-    });
-    document.getElementById("searchInput").addEventListener("keypress", (e) => { if(e.key === "Enter") document.getElementById("searchBtn").click(); });
-    document.getElementById("homeLink").addEventListener("click", (e) => {
-        e.preventDefault();
-        categoriaAtual = "todos";
-        termoBusca = "";
-        document.getElementById("searchInput").value = "";
-        renderProducts();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-    document.getElementById("btnNews").addEventListener("click", () => {
-        const email = document.getElementById("emailNews").value.trim();
-        if(email && email.includes("@")) alert(`✅ Inscrito: ${email}`);
-        else alert("E-mail inválido");
+    // Geocodificação automática
+    document.getElementById("clienteEndereco").addEventListener("blur", function() {
+        const endereco = this.value.trim();
+        if(endereco) { geocodeAddress(endereco); }
     });
     
     renderOfertas();
     carregarCarrinho();
     renderProducts();
+    window.initMap = initMap;
 </script>
 </body>
     </html>
