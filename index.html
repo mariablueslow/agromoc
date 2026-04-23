@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Agromoc | Loja Premium</title>
+    <title>Agromoc | Loja Rural Premium</title>
     
     <!-- Swiper JS + CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -113,7 +113,7 @@
             z-index: 999;
             align-items: center;
         }
-        nav a, .cart-icon, .user-link {
+        nav a, .user-link {
             color: #1a4a1f;
             text-decoration: none;
             font-weight: 600;
@@ -126,28 +126,50 @@
             align-items: center;
             gap: 6px;
         }
-        nav a:hover, .cart-icon:hover, .user-link:hover {
+        nav a:hover, .user-link:hover {
             border-bottom-color: #f5a623;
         }
+        
         .cart-icon {
             position: relative;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a4a1f;
+            font-weight: 600;
+            font-size: 1rem;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            gap: 6px;
+        }
+        .cart-icon:hover {
+            border-bottom-color: #f5a623;
+        }
+        .cart-icon i {
+            font-size: 1.1rem;
         }
         .cart-count {
             position: absolute;
-            top: -8px;
-            right: -12px;
+            top: -10px;
+            right: -15px;
             background: #f5a623;
             color: #1e3a1a;
             font-size: 0.7rem;
             font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 50%;
             min-width: 18px;
-            text-align: center;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .hero {
-            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.pexels.com/photos/1024550/agriculture-field-rural-land-1024550.jpg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+            background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://media.istockphoto.com/id/96700623/id/foto/kuda-putih-berjalan-gallop-di-musim-dingin.jpg?s=612x612&w=0&k=20&c=GS42k4gyY3WNW4_uT6Mtwma5zSNuMGUiLZTJ6Ouzo00=') center/cover no-repeat;
             height: 65vh;
             min-height: 420px;
             display: flex;
@@ -746,8 +768,7 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* MODAL DE NOTIFICAÇÕES (Cadastro simplificado) */
-        .notify-modal {
+        .cadastro-modal {
             display: none;
             position: fixed;
             z-index: 10002;
@@ -758,7 +779,7 @@
             background-color: rgba(0,0,0,0.8);
             backdrop-filter: blur(5px);
         }
-        .notify-content {
+        .cadastro-content {
             background: white;
             margin: 10% auto;
             width: 90%;
@@ -766,21 +787,21 @@
             border-radius: 32px;
             overflow: hidden;
         }
-        .notify-header {
+        .cadastro-header {
             background: linear-gradient(135deg, #0f3b14, #1c5e24);
             color: white;
             padding: 20px;
             text-align: center;
         }
-        .notify-body {
+        .cadastro-body {
             padding: 24px;
             text-align: center;
         }
-        .notify-body p {
+        .cadastro-body p {
             margin-bottom: 20px;
             color: #4a6741;
         }
-        .btn-notify {
+        .btn-cadastro {
             background: #2e7d32;
             color: white;
             width: 100%;
@@ -791,7 +812,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .btn-notify:hover {
+        .btn-cadastro:hover {
             background: #1b5e20;
         }
 
@@ -1041,7 +1062,7 @@
     <a href="#" id="homeLink">Início</a>
     <a href="#" id="produtosMenuLink">Produtos</a>
     <a href="#" id="contatoLink">Contato</a>
-    <a href="#" id="notifyLink" class="user-link"><i class="fas fa-bell"></i> Notificações</a>
+    <a href="#" id="cadastroLink" class="user-link"><i class="fas fa-user-plus"></i> Cadastrar</a>
     <div class="cart-icon" id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
@@ -1059,8 +1080,8 @@
 
 <div class="hero">
     <div class="hero-content">
-        <h2>Ração de qualidade e Moda Country para quem vive vaquejada de verdade </h2>
-        <p>Qualidade premium para o agro que movimenta</p>
+        <h2>Moda country e nutrição de qualidade</h2>
+        <p>Qualidade premium para o agro da nossa região</p>
         <button class="btn-hero" onclick="document.getElementById('produtosSection').scrollIntoView({behavior:'smooth'})">
             Explorar produtos →
         </button>
@@ -1092,8 +1113,8 @@
     <div class="features">
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
-            <h4>Fazemos Entregas </h4>
-            <p>Entregamos o seu produto com eficiência e a prazo</p>
+            <h4>Fazemos entregas</h4>
+            <p>Consulte regiões e prazos</p>
         </div>
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-seedling"></i></div>
@@ -1103,7 +1124,7 @@
         <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h4>Suporte Técnico</h4>
-            <p>Equipe ideal te orientar em suas escolhas </p>
+            <p>Equipe especializada para te auxiliar na sua escolha</p>
         </div>
     </div>
 </div>
@@ -1111,7 +1132,7 @@
 <div class="container">
     <div class="newsletter">
         <h3><i class="fas fa-envelope-open-text"></i> Receba ofertas exclusivas</h3>
-        <p>Fique por dentro de lançamentos e descontos especiais.</p>
+        <p>Fique por dentro de lançamentos e descontos especiais para o campo.</p>
         <div class="news-group">
             <input type="email" id="emailNews" placeholder="Seu melhor e-mail">
             <button id="btnNews">Inscrever-se</button>
@@ -1144,7 +1165,7 @@
         </div>
     </div>
     <div class="copyright">
-        <p>© 2026 Agromoc - Tecnologia e tradição. Todos os direitos reservados.</p>
+        <p>© 2026 Agromoc - Tecnologia e tradição que movem o campo. Todos os direitos reservados.</p>
     </div>
 </footer>
 
@@ -1207,32 +1228,31 @@
     </div>
 </div>
 
-<!-- MODAL DE NOTIFICAÇÕES (Cadastro simplificado) -->
-<div id="notifyModal" class="notify-modal">
-    <div class="notify-content">
-        <div class="notify-header">
-            <h3><i class="fas fa-bell"></i> Receba Notificações</h3>
+<div id="cadastroModal" class="cadastro-modal">
+    <div class="cadastro-content">
+        <div class="cadastro-header">
+            <h3><i class="fas fa-user-plus"></i> Cadastre-se</h3>
         </div>
-        <div class="notify-body">
+        <div class="cadastro-body">
             <p>Cadastre seu e-mail para receber ofertas exclusivas, novidades e promoções da Agromoc!</p>
             <div class="form-group">
-                <input type="email" id="notifyEmail" placeholder="Seu melhor e-mail" style="width: 100%;">
+                <input type="email" id="cadastroEmail" placeholder="Seu melhor e-mail" style="width: 100%;">
             </div>
             <div class="form-group">
-                <input type="text" id="notifyNome" placeholder="Seu nome (opcional)" style="width: 100%;">
+                <input type="text" id="cadastroNome" placeholder="Seu nome (opcional)" style="width: 100%;">
             </div>
-            <button class="btn-notify" id="btnCadastrarNotificacao">Cadastrar e Receber Notificações</button>
-            <button class="btn-fechar-checkout" id="btnFecharNotify" style="margin-top: 10px;">Fechar</button>
+            <button class="btn-cadastro" id="btnCadastrar">Cadastrar</button>
+            <button class="btn-fechar-checkout" id="btnFecharCadastro" style="margin-top: 10px;">Fechar</button>
         </div>
     </div>
 </div>
 
-<div id="pixModal" class="auth-modal" style="display: none;">
-    <div class="auth-content" style="max-width: 400px;">
-        <div class="auth-header">
+<div id="pixModal" class="cadastro-modal" style="display: none;">
+    <div class="cadastro-content" style="max-width: 400px;">
+        <div class="cadastro-header">
             <h3><i class="fab fa-pix"></i> Transferência PIX</h3>
         </div>
-        <div class="auth-body" style="text-align: center;">
+        <div class="cadastro-body" style="text-align: center;">
             <div id="pixModalQrcode" style="display: flex; justify-content: center; margin: 15px 0;"></div>
             <div id="pixModalCodigo" class="pix-codigo"></div>
             <p style="margin-top: 15px;">Escaneie o QR Code ou copie o código para transferir via PIX</p>
@@ -1337,7 +1357,7 @@
         }
     }
     
-    // PRODUTOS
+    // PRODUTOS COMPLETOS
     const produtosData = {
         todos: [
             { 
@@ -1346,7 +1366,7 @@
                 preco: 199.90, 
                 precoStr: "A partir de R$ 199,90", 
                 desc: "Botinas de segurança para o campo em couro legítimo. Solado antiderrapante, biqueira de aço, resistentes à água e produtos químicos. Ideais para trabalho rural e pecuária.", 
-                img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=600", 
+                img: "", 
                 badge: "Vários modelos", 
                 categoria: "botinas",
                 opcoes: (() => {
@@ -1362,8 +1382,8 @@
                                     nome: `${marca} - Tamanho ${tam} - ${cor}`,
                                     preco: precosBase[marca],
                                     precoStr: `R$ ${precosBase[marca].toFixed(2).replace('.', ',')}`,
-                                    desc: `Botina ${marca} em couro legítimo. Solado antiderrapante, biqueira de aço. Tamanho ${tam}, cor ${cor}. Ideal para trabalho rural.`,
-                                    img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=200"
+                                    desc: `Botina ${marca} em couro legítimo. Solado antiderrapante, biqueira de aço. Tamanho ${tam}, cor ${cor}.`,
+                                    img: ""
                                 });
                             });
                         });
@@ -1371,27 +1391,25 @@
                     return opcoes;
                 })(),
                 opcoesAgrupadas: true,
-                gruposOpcoes: [{ titulo: "Todas as Botinas (Marcas, Tamanhos e Cores)", itens: [] }]
+                gruposOpcoes: [{ titulo: "Todas as Botinas", itens: [] }]
             },
             { 
                 nome: "Chapéus e Bonés", 
                 marca: "Palha Brasil / Couro Nobre / Vaquero / AgroStyle",
                 preco: 39.90, 
                 precoStr: "A partir de R$ 39,90", 
-                desc: "Proteção solar para o campo. Chapéus de palha natural, couro legítimo e bonés com proteção UV. Ideais para longas jornadas de trabalho ao sol.", 
+                desc: "Proteção solar para o campo. Chapéus de palha natural, couro legítimo e bonés com proteção UV.", 
                 img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=600", 
                 badge: "Novidades", 
                 categoria: "chapeus",
                 opcoes: [
-                    { nome: "Chapéu Palha Tradicional - Palha Natural", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural, leve e respirável. Marca Palha Brasil.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Chapéu Palha Tradicional - Palha Escura", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural escura. Marca Palha Brasil.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Chapéu Couro Legítimo - Marrom", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo, resistente e durável. Marca Couro Nobre.", img: "https://images.pexels.com/photos/2712019/pexels-photo-2712019.jpeg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Chapéu Couro Legítimo - Preto", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo preto. Marca Couro Nobre.", img: "https://images.pexels.com/photos/2712019/pexels-photo-2712019.jpeg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Chapéu Vaquero - Bege", preco: 89.90, precoStr: "R$ 89,90", desc: "Chapéu estilo vaqueiro, abas largas. Marca Vaquero.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Chapéu Vaquero - Marrom", preco: 89.90, precoStr: "R$ 89,90", desc: "Chapéu estilo vaqueiro marrom. Marca Vaquero.", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Boné Agro - Verde", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Boné Agro - Preto", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão preto com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Boné Agro - Azul", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão azul com proteção UV. Marca AgroStyle.", img: "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=200" }
+                    { nome: "Chapéu Palha Tradicional - Palha Natural", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural. Marca Palha Brasil.", img: "h" },
+                    { nome: "Chapéu Palha Tradicional - Palha Escura", preco: 49.90, precoStr: "R$ 49,90", desc: "Chapéu de palha natural escura. Marca Palha Brasil.", img: "" },
+                    { nome: "Chapéu Couro Legítimo - Marrom", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo. Marca Couro Nobre.", img: "" },
+                    { nome: "Chapéu Couro Legítimo - Preto", preco: 129.90, precoStr: "R$ 129,90", desc: "Chapéu de couro legítimo preto. Marca Couro Nobre.", img: "" },
+                    { nome: "Boné Agro - Verde", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão com proteção UV. Marca AgroStyle.", img: "" },
+                    { nome: "Boné Agro - Preto", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão preto. Marca AgroStyle.", img: "" },
+                    { nome: "Boné Agro - Azul", preco: 39.90, precoStr: "R$ 39,90", desc: "Boné em algodão azul. Marca AgroStyle.", img: "" }
                 ],
                 opcoesAgrupadas: true,
                 gruposOpcoes: [{ titulo: "Chapéus e Bonés", itens: [] }]
@@ -1401,17 +1419,17 @@
                 marca: "Equus Premium / HorsePower",
                 preco: 159.90, 
                 precoStr: "A partir de R$ 159,90", 
-                desc: "Nutrição completa para equinos. Ração premium com vitaminas, minerais e proteínas de alta qualidade. Melhora a performance, saúde e pelagem dos cavalos.", 
+                desc: "Nutrição completa para equinos. Ração premium com vitaminas, minerais e proteínas de alta qualidade.", 
                 img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", 
                 badge: "Premium", 
                 categoria: "racao",
                 opcoes: [
-                    { nome: "Equus Premium - Cavalo Atleta - Pacote 5kg", preco: 189.90, precoStr: "R$ 189,90", desc: "Ração para alta performance. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Equus Premium - Cavalo Atleta - Pacote 10kg", preco: 349.90, precoStr: "R$ 349,90", desc: "Ração para alta performance. Economize 7%. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "Equus Premium - Cavalo Atleta - Pacote 20kg", preco: 649.90, precoStr: "R$ 649,90", desc: "Ração para alta performance. Economize 14%. Marca Equus Premium.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "HorsePower - Cavalo Criador - Pacote 5kg", preco: 169.90, precoStr: "R$ 169,90", desc: "Ração para reprodução. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "HorsePower - Cavalo Criador - Pacote 10kg", preco: 314.90, precoStr: "R$ 314,90", desc: "Ração para reprodução. Economize 7%. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "HorsePower - Cavalo Criador - Pacote 20kg", preco: 579.90, precoStr: "R$ 579,90", desc: "Ração para reprodução. Economize 14%. Marca HorsePower.", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=200" }
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 5kg", preco: 189.90, precoStr: "R$ 189,90", desc: "Ração para alta performance. Marca Equus Premium.", img: "" },
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 10kg", preco: 349.90, precoStr: "R$ 349,90", desc: "Ração para alta performance. Economize 7%.", img: "" },
+                    { nome: "Equus Premium - Cavalo Atleta - Pacote 20kg", preco: 649.90, precoStr: "R$ 649,90", desc: "Ração para alta performance. Economize 14%.", img: "" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 5kg", preco: 169.90, precoStr: "R$ 169,90", desc: "Ração para reprodução. Marca HorsePower.", img: "" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 10kg", preco: 314.90, precoStr: "R$ 314,90", desc: "Ração para reprodução. Economize 7%.", img: "" },
+                    { nome: "HorsePower - Cavalo Criador - Pacote 20kg", preco: 579.90, precoStr: "R$ 579,90", desc: "Ração para reprodução. Economize 14%.", img: "" }
                 ],
                 opcoesAgrupadas: true,
                 gruposOpcoes: [{ titulo: "Rações para Cavalos", itens: [] }]
@@ -1421,23 +1439,80 @@
                 marca: "DogChef / PetPremium",
                 preco: 84.90, 
                 precoStr: "A partir de R$ 84,90", 
-                desc: "Alimentação completa para cães. Ração premium com proteínas selecionadas, vitaminas e minerais para todas as raças e portes. Saúde e energia para seu melhor amigo.", 
+                desc: "Alimentação completa para cães. Ração premium com proteínas selecionadas, vitaminas e minerais.", 
                 img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=600", 
                 badge: "Cães", 
                 categoria: "racao",
                 opcoes: [
-                    { nome: "DogChef - Cão Adulto Premium - Pacote 5kg", preco: 89.90, precoStr: "R$ 89,90", desc: "Para cães adultos porte médio/grande. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "DogChef - Cão Adulto Premium - Pacote 10kg", preco: 166.90, precoStr: "R$ 166,90", desc: "Para cães adultos. Economize 7%. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "DogChef - Cão Adulto Premium - Pacote 20kg", preco: 306.90, precoStr: "R$ 306,90", desc: "Para cães adultos. Economize 14%. Marca DogChef.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "PetPremium - Cão Filhote - Pacote 5kg", preco: 99.90, precoStr: "R$ 99,90", desc: "Nutrição completa para crescimento. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "PetPremium - Cão Filhote - Pacote 10kg", preco: 184.90, precoStr: "R$ 184,90", desc: "Para filhotes. Economize 7%. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
-                    { nome: "PetPremium - Cão Filhote - Pacote 20kg", preco: 339.90, precoStr: "R$ 339,90", desc: "Para filhotes. Economize 14%. Marca PetPremium.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" }
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 5kg", preco: 89.90, precoStr: "R$ 89,90", desc: "Para cães adultos porte médio/grande.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 10kg", preco: 166.90, precoStr: "R$ 166,90", desc: "Para cães adultos. Economize 7%.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "DogChef - Cão Adulto Premium - Pacote 20kg", preco: 306.90, precoStr: "R$ 306,90", desc: "Para cães adultos. Economize 14%.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 5kg", preco: 99.90, precoStr: "R$ 99,90", desc: "Nutrição completa para crescimento.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 10kg", preco: 184.90, precoStr: "R$ 184,90", desc: "Para filhotes. Economize 7%.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "PetPremium - Cão Filhote - Pacote 20kg", preco: 339.90, precoStr: "R$ 339,90", desc: "Para filhotes. Economize 14%.", img: "https://images.pexels.com/photos/3748989/dog-food-bowl-pet-feeding-3748989.jpg?auto=compress&cs=tinysrgb&w=200" }
                 ],
                 opcoesAgrupadas: true,
                 gruposOpcoes: [{ titulo: "Rações para Cachorros", itens: [] }]
+            },
+            { 
+                nome: "Ração para Gatos", 
+                marca: "Felix Premium / CatPower",
+                preco: 74.90, 
+                precoStr: "A partir de R$ 74,90", 
+                desc: "Nutrição balanceada para gatos. Ração premium com sabor irresistível, vitaminas e minerais para saúde e bem-estar dos felinos.", 
+                img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Gatos", 
+                categoria: "racao",
+                opcoes: [
+                    { nome: "Felix Premium - Gato Adulto - Pacote 5kg", preco: 79.90, precoStr: "R$ 79,90", desc: "Sabor frango e salmão. Marca Felix Premium.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Felix Premium - Gato Adulto - Pacote 10kg", preco: 149.90, precoStr: "R$ 149,90", desc: "Sabor frango e salmão. Economize 6%.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "Felix Premium - Gato Adulto - Pacote 20kg", preco: 279.90, precoStr: "R$ 279,90", desc: "Sabor frango e salmão. Economize 12%.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "CatPower - Gato Castrado - Pacote 5kg", preco: 84.90, precoStr: "R$ 84,90", desc: "Controle de peso e saúde urinária. Marca CatPower.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "CatPower - Gato Castrado - Pacote 10kg", preco: 159.90, precoStr: "R$ 159,90", desc: "Controle de peso. Economize 6%.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "CatPower - Gato Castrado - Pacote 20kg", preco: 299.90, precoStr: "R$ 299,90", desc: "Controle de peso. Economize 12%.", img: "https://images.pexels.com/photos/127027/cat-food-bowl-cat-eating-127027.jpeg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Rações para Gatos", itens: [] }]
+            },
+            { 
+                nome: "Feno Alfafa Premium", 
+                marca: "HorseFiber / AlfafaGold",
+                preco: 74.90, 
+                precoStr: "A partir de R$ 74,90", 
+                desc: "Feno de alfafa de alta qualidade, rico em fibras e nutrientes. Ideal para equinos, coelhos e pequenos ruminantes.", 
+                img: "https://images.pexels.com/photos/5403118/hay-bales-on-field-5403118.jpg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Nutrição Animal", 
+                categoria: "feno",
+                opcoes: [
+                    { nome: "HorseFiber - Fardo 12kg", preco: 74.90, precoStr: "R$ 74,90", desc: "Feno de alfafa pura. Ideal para equinos.", img: "https://images.pexels.com/photos/5403118/hay-bales-on-field-5403118.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "HorseFiber - Fardo 25kg", preco: 139.90, precoStr: "R$ 139,90", desc: "Feno de alfafa pura. Melhor custo-benefício.", img: "https://images.pexels.com/photos/5403118/hay-bales-on-field-5403118.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "AlfafaGold - Pallet 10 fardos", preco: 1299.90, precoStr: "R$ 1.299,90", desc: "Para criadores profissionais. Economia garantida.", img: "https://images.pexels.com/photos/5403118/hay-bales-on-field-5403118.jpg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Feno Alfafa", itens: [] }]
+            },
+            { 
+                nome: "Medicamentos Veterinários", 
+                marca: "VetCare / AnimalHealth",
+                preco: 45.90, 
+                precoStr: "A partir de R$ 45,90", 
+                desc: "Vermífugos e medicamentos para a saúde animal. Proteção completa contra parasitas internos e externos.", 
+                img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=600", 
+                badge: "Veterinário", 
+                categoria: "veterinaria",
+                opcoes: [
+                    { nome: "VetCare - Vermífugo Equino - Unidade", preco: 45.90, precoStr: "R$ 45,90", desc: "Proteção contra parasitas em equinos. Marca VetCare.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "VetCare - Vermífugo Equino - Kit 3 unidades", preco: 129.90, precoStr: "R$ 129,90", desc: "Economize 6%. Tratamento completo.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "AnimalHealth - Vermífugo Canino - Unidade", preco: 35.90, precoStr: "R$ 35,90", desc: "Proteção para cães. Marca AnimalHealth.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "AnimalHealth - Vermífugo Canino - Kit 3 unidades", preco: 99.90, precoStr: "R$ 99,90", desc: "Economize 7%. Para cães de todos os portes.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "AnimalHealth - Vermífugo Felino - Unidade", preco: 39.90, precoStr: "R$ 39,90", desc: "Proteção para gatos. Marca AnimalHealth.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" },
+                    { nome: "AnimalHealth - Vermífugo Felino - Kit 3 unidades", preco: 109.90, precoStr: "R$ 109,90", desc: "Economize 8%. Para gatos de todas as idades.", img: "https://images.pexels.com/photos/4588061/veterinarian-examining-horse-4588061.jpg?auto=compress&cs=tinysrgb&w=200" }
+                ],
+                opcoesAgrupadas: true,
+                gruposOpcoes: [{ titulo: "Vermífugos e Medicamentos", itens: [] }]
             }
         ],
-        botinas: [], chapeus: [], racao: []
+        botinas: [], chapeus: [], racao: [], feno: [], veterinaria: []
     };
     
     produtosData.todos.forEach(prod => {
@@ -1448,9 +1523,9 @@
     });
     
     const ofertasList = [
-        { nome: "Botina Agroforte - Promoção", precoAntigo: "R$ 249,90", precoOfertaNum: 179.90, precoOferta: "R$ 179,90", parcela: "ou 3x R$ 59,97", img: "https://images.pexels.com/photos/1837905/pexels-photo-1837905.jpeg?auto=compress&cs=tinysrgb&w=600", badge: "-28%" },
-        { nome: "Chapéu Palha + Boné", precoAntigo: "R$ 89,90", precoOfertaNum: 69.90, precoOferta: "R$ 69,90", parcela: "ou 2x R$ 34,95", img: "https://images.pexels.com/photos/5598325/hat-straw-hat-sombrero-straw-5598325.jpg?auto=compress&cs=tinysrgb&w=600", badge: "-22%" },
-        { nome: "Ração Cavalo Atleta 20kg", precoAntigo: "R$ 349,90", precoOfertaNum: 299.90, precoOferta: "R$ 299,90", parcela: "ou 4x R$ 74,97", img: "https://images.pexels.com/photos/6173910/feeding-chicken-feed-animals-farm-6173910.jpg?auto=compress&cs=tinysrgb&w=600", badge: "-14%" }
+        { nome: "Botina Agroforte - Promoção", precoAntigo: "R$ 249,90", precoOfertaNum: 179.90, precoOferta: "R$ 179,90", parcela: "ou 3x R$ 59,97", img: "", badge: "-28%" },
+        { nome: "Kit Vermífugo Completo", precoAntigo: "R$ 149,90", precoOfertaNum: 119.90, precoOferta: "R$ 119,90", parcela: "ou 3x R$ 39,97", img: "", badge: "-20%" },
+        { nome: "Ração Gato Adulto 10kg", precoAntigo: "R$ 169,90", precoOfertaNum: 149.90, precoOferta: "R$ 149,90", parcela: "ou 3x R$ 49,97", img: "", badge: "-12%" }
     ];
     
     function renderOfertas() {
@@ -1501,7 +1576,8 @@
         let totalItens = 0, totalPreco = 0;
         if(carrinho.length === 0) {
             itemsDiv.innerHTML = '<div class="cart-empty">🛒 Seu carrinho está vazio</div>';
-            countSpan.textContent = '0'; totalSpan.textContent = 'R$ 0,00';
+            countSpan.textContent = '0';
+            totalSpan.textContent = 'R$ 0,00';
             return;
         }
         let html = '';
@@ -1557,32 +1633,30 @@
         document.getElementById('checkoutModal').style.display = 'none';
     }
     
-    // NOTIFICAÇÕES (Cadastro simplificado)
-    function abrirNotifyModal() {
-        document.getElementById('notifyModal').style.display = 'block';
+    function abrirCadastroModal() {
+        document.getElementById('cadastroModal').style.display = 'block';
     }
     
-    function cadastrarNotificacao() {
-        const email = document.getElementById('notifyEmail').value.trim();
-        const nome = document.getElementById('notifyNome').value.trim();
+    function cadastrarUsuario() {
+        const email = document.getElementById('cadastroEmail').value.trim();
+        const nome = document.getElementById('cadastroNome').value.trim();
         
         if(!email || !email.includes('@')) {
-            alert('Por favor, insira um e-mail válido para receber as notificações!');
+            alert('Por favor, insira um e-mail válido para receber as novidades!');
             return;
         }
         
-        // Salvar no localStorage
-        const notificados = JSON.parse(localStorage.getItem('agromoc_notificacoes') || '[]');
-        if(!notificados.find(n => n.email === email)) {
-            notificados.push({ email, nome, data: new Date().toLocaleString() });
-            localStorage.setItem('agromoc_notificacoes', JSON.stringify(notificados));
+        const cadastrados = JSON.parse(localStorage.getItem('agromoc_cadastros') || '[]');
+        if(!cadastrados.find(c => c.email === email)) {
+            cadastrados.push({ email, nome, data: new Date().toLocaleString() });
+            localStorage.setItem('agromoc_cadastros', JSON.stringify(cadastrados));
         }
         
         alert(`✅ ${nome ? nome : 'Usuário'}! Seu e-mail ${email} foi cadastrado com sucesso!\n\nVocê receberá nossas ofertas, novidades e promoções exclusivas!`);
         
-        document.getElementById('notifyEmail').value = '';
-        document.getElementById('notifyNome').value = '';
-        document.getElementById('notifyModal').style.display = 'none';
+        document.getElementById('cadastroEmail').value = '';
+        document.getElementById('cadastroNome').value = '';
+        document.getElementById('cadastroModal').style.display = 'none';
     }
     
     let swiper = null;
@@ -1657,9 +1731,9 @@
     document.getElementById("btnFecharCheckout").onclick = () => document.getElementById("checkoutModal").style.display = "none";
     document.getElementById("pixFixoBtn").onclick = abrirPixFixo;
     document.getElementById("btnFecharPixModal").onclick = () => document.getElementById("pixModal").style.display = "none";
-    document.getElementById("notifyLink").onclick = (e) => { e.preventDefault(); abrirNotifyModal(); };
-    document.getElementById("btnCadastrarNotificacao").onclick = cadastrarNotificacao;
-    document.getElementById("btnFecharNotify").onclick = () => document.getElementById("notifyModal").style.display = "none";
+    document.getElementById("cadastroLink").onclick = (e) => { e.preventDefault(); abrirCadastroModal(); };
+    document.getElementById("btnCadastrar").onclick = cadastrarUsuario;
+    document.getElementById("btnFecharCadastro").onclick = () => document.getElementById("cadastroModal").style.display = "none";
     
     document.getElementById("homeLink").onclick = (e) => { e.preventDefault(); categoriaAtual="todos"; termoBusca=""; document.getElementById("searchInput").value=""; renderProducts(); window.scrollTo({top:0,behavior:"smooth"}); };
     document.getElementById("produtosMenuLink").onclick = (e) => { e.preventDefault(); document.getElementById("produtosSection").scrollIntoView({behavior:"smooth"}); };
@@ -1668,7 +1742,6 @@
     document.getElementById("searchInput").addEventListener("keypress", (e) => { if(e.key==="Enter") document.getElementById("searchBtn").click(); });
     document.getElementById("btnNews").onclick = () => { const email = document.getElementById("emailNews").value.trim(); if(email && email.includes("@")) { alert(`✅ Inscrito: ${email}! Você receberá nossas ofertas.`); document.getElementById("emailNews").value = ""; } else alert("E-mail inválido"); };
     
-    // Geocodificação automática
     document.getElementById("clienteEndereco").addEventListener("blur", function() {
         const endereco = this.value.trim();
         if(endereco) { geocodeAddress(endereco); }
@@ -1680,4 +1753,4 @@
     window.initMap = initMap;
 </script>
 </body>
-    </html>
+</html>
